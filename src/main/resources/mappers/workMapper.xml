@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hgtech.worksystem.repository.WorkRepository">
+    <insert id="insert">
+        insert into tbl_work (wkRegDate, wkModDate, wkRepDate, wkTtl, wkDsc, wkDueDate, wkUser, wkResUser, wkTag, wkImp, wkParent, wkRank) values (#{wkRegDate}, #{wkModDate}, #{wkRepDate}, #{wkTtl}, #{wkDsc}, #{wkDueDate}, #{wkUser}, #{wkResUser}, #{wkTag}, #{wkImp}, #{wkParent}, #{wkRank})
+    </insert>
+
+    <select id="selectAll" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select * from tbl_work
+    </select>
+
+    <select id="selectById" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select * from tbl_work where wkId = #{wkId}
+    </select>
+
+    <select id="selectByParentId" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select * from tbl_work where wkPparent = #{wkParent}
+    </select>
+
+    <select id="selectLast" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select * from tbl_work order by id desc limit 1
+    </select>
+
+    <delete id="delete">
+        delete from tbl_work where wkId = #{wkId}
+    </delete>
+
+    <update id="update">
+        update tbl_work set wkRegDate = #{wkRegDate}, wkModDate = #{wkModDate}, wkRepDate = #{wkRepDate}, wkTtl = #{wkTtl}, wkDsc = #{wkDsc}, wkDueDate = #{wkDueDate}, wkUser = #{wkUser}, wkResUser = #{wkResUser}, wkTag = #{wkTag}, wkImp = #{wkImp}, wkParent = #{wkParent}, wkRank = #{wkRank} where wkId= #{wkId}
+    </update>
+</mapper>
