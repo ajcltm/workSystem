@@ -9,16 +9,16 @@
         select * from tbl_work
     </select>
 
-    <select id="selectById" resultType="org.hgtech.worksystem.domain.WorkVO">
+    <select id="selectByWkId" resultType="org.hgtech.worksystem.domain.WorkVO">
         select * from tbl_work where wkId = #{wkId}
     </select>
 
-    <select id="selectByParentId" resultType="org.hgtech.worksystem.domain.WorkVO">
-        select * from tbl_work where wkPparent = #{wkParent}
+    <select id="selectByParent" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select * from tbl_work where wkParent = #{wkParent}
     </select>
 
     <select id="selectLast" resultType="org.hgtech.worksystem.domain.WorkVO">
-        select * from tbl_work order by id desc limit 1
+        select * from tbl_work order by wkId desc limit 1
     </select>
 
     <delete id="delete">

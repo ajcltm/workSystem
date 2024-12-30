@@ -21,6 +21,7 @@ public class WorkRepositoryTest {
     WorkRepository repository;
 
     public WorkVO createVO() {
+//      VO 객체 생성 
         WorkVO vo = WorkVO.builder()
                 .wkId(createRandomNumber())
                 .wkRegDate(createRandomDatetime())
@@ -62,6 +63,8 @@ public class WorkRepositoryTest {
 
     @Test
     public void insertTest() {
+        WorkVO vo = createVO();
+        System.out.println(vo);
         int result = repository.insert(createVO());
         Assertions.assertEquals(result,1);
     }
@@ -82,13 +85,15 @@ public class WorkRepositoryTest {
     @Test
     public void selectByIdTest () {
         repository.insert(createVO());
-        Assertions.assertEquals(repository.selectLast().getWkId(), repository.selectById(repository.selectLast().getWkId()).getWkId());
+//      id 속성 이름 확인 필요
+        Assertions.assertEquals(repository.selectLast().getWkId(), repository.selectByWkId(repository.selectLast().getWkId()).getWkId());
     }
 
     @Test
     public void selectByParentIdTest () {
         repository.insert(createVO());
-        Assertions.assertEquals(repository.selectLast().getWkParent(), repository.selectByParentId(repository.selectLast().getWkParent()).get(0).getWkParent());
+//      Foriegn Id 확인 필요
+        Assertions.assertEquals(repository.selectLast().getWkParent(), repository.selectByParent(repository.selectLast().getWkParent()).get(0).getWkParent());
     }
 
     @Test
@@ -101,6 +106,7 @@ public class WorkRepositoryTest {
     @Test
     public void updateTest(){
         repository.insert(createVO());
+//      수정하고자 하는 속성 이름과 해당 객체 확인 필요
         String input = repository.selectLast().getWkTtl();
         WorkVO vo = repository.selectLast();
         vo.setWkTtl(createRandomString());

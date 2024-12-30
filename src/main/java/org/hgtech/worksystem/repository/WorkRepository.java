@@ -11,8 +11,8 @@ public interface WorkRepository {
     int insert(WorkVO workVO);
     List<WorkVO> selectAll();
     WorkVO selectLast();
-    WorkVO selectById(int wkId);
-    List<WorkVO> selectByParentId(int wkParent);
+    WorkVO selectByWkId(int wkId);
+    List<WorkVO> selectByParent(int wkParent);
     int delete(int wkId);
     int update(WorkVO workVO);
 }
