@@ -1,28 +1,26 @@
-package org.hgtech.worksystem.repositoryTest;
+package org.hgtech.worksystem.serviceTest;
 
+import org.hgtech.worksystem.DTO.WorkDTO;
 import org.hgtech.worksystem.domain.WorkVO;
-import org.hgtech.worksystem.repository.WorkRepository;
-import org.springframework.boot.test.context.SpringBootTest;
-
+import org.hgtech.worksystem.service.WorkService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 @SpringBootTest
-public class WorkRepositoryTest {
-
+public class WorkServiceTest {
     @Autowired
-    WorkRepository repository;
+    WorkService service;
 
-    public WorkVO createVO() {
-//      VO 객체 생성 
-        WorkVO vo = WorkVO.builder()
+    public WorkDTO createDTO() {
+//      VO 객체 생성
+        WorkDTO dto = WorkDTO.builder()
                 .wkId(createRandomNumber())
                 .wkRegDate(createRandomDatetime())
                 .wkModDate(createRandomDatetime())
@@ -37,7 +35,7 @@ public class WorkRepositoryTest {
                 .wkParent(createRandomNumber())
                 .wkRank(createRandomNumber())
                 .build();
-        return vo;
+        return dto;
     }
 
 
@@ -62,53 +60,53 @@ public class WorkRepositoryTest {
 
 
     @Test
-    public void insertTest() {
-        int result = repository.insert(createVO());
+    public void registerTest() {
+        int result = service.register(createDTO());
         Assertions.assertEquals(result,1);
     }
 
     @Test
     public void selectLastTest() {
-        repository.insert(createVO());
-        System.out.println(repository.selectLast());
+        service.register(createDTO());
+        System.out.println(service.getLast());
     }
 
     @Test
     public void selectAllTest () {
-        repository.insert(createVO());
-        repository.insert(createVO());
-        System.out.println(repository.selectAll());
+        service.register(createDTO());
+        service.register(createDTO());
+        System.out.println(service.getAll());
     }
 
     @Test
     public void selectByIdTest () {
-        repository.insert(createVO());
+        service.register(createDTO());
 //      id 속성 이름 확인 필요
-        Assertions.assertEquals(repository.selectLast().getWkId(), repository.selectByWkId(repository.selectLast().getWkId()).getWkId());
+        Assertions.assertEquals(service.getLast().getWkId(), service.getByWkId(service.getLast().getWkId()).getWkId());
     }
 
     @Test
     public void selectByParentIdTest () {
-        repository.insert(createVO());
+        service.register(createDTO());
 //      Foriegn Id 확인 필요
-        Assertions.assertEquals(repository.selectLast().getWkParent(), repository.selectByParent(repository.selectLast().getWkParent()).get(0).getWkParent());
+        Assertions.assertEquals(service.getLast().getWkParent(), service.getByParent(service.getLast().getWkParent()).get(0).getWkParent());
     }
 
     @Test
     public void deleteTest() {
-        repository.insert(createVO());
-        int result = repository.delete(repository.selectLast().getWkId());
+        service.register(createDTO());
+        int result = service.remove(service.getLast().getWkId());
         Assertions.assertEquals(result,1);
     }
 
     @Test
     public void updateTest(){
-        repository.insert(createVO());
+        service.register(createDTO());
 //      수정하고자 하는 속성 이름과 해당 객체 확인 필요
-        String input = repository.selectLast().getWkTtl();
-        WorkVO vo = repository.selectLast();
-        vo.setWkTtl(createRandomString());
-        repository.update(vo);
-        Assertions.assertNotEquals(input, repository.selectLast().getWkTtl());
+        String input = service.getLast().getWkTtl();
+        WorkDTO dto = service.getLast();
+        dto.setWkTtl(createRandomString());
+        service.modify(dto);
+        Assertions.assertNotEquals(input, service.getLast().getWkTtl());
     }
 }

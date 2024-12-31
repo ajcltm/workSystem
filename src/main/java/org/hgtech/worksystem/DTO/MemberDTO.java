@@ -1,4 +1,4 @@
-package org.hgtech.worksystem.domain;
+package org.hgtech.worksystem.DTO;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberVO {
+public class MemberDTO {
     int mbId;
     LocalDateTime mbRegDate;
     LocalDateTime mbModDate;

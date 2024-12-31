@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hgtech.worksystem.repository.StakeholderRepository">
+    <insert id="insert">
+        insert into tbl_stakeholder (shRegDate, shModDate, shName, shCompany, shMobile, shPhone, shEmail, shAddress, shWkId) values (#{shRegDate}, #{shModDate}, #{shName}, #{shCompany}, #{shMobile}, #{shPhone}, #{shEmail}, #{shAddress}, #{shWkId})
+    </insert>
+
+    <select id="selectAll" resultType="org.hgtech.worksystem.domain.StakeholderVO">
+        select * from tbl_stakeholder
+    </select>
+
+    <select id="selectByShId" resultType="org.hgtech.worksystem.domain.StakeholderVO">
+        select * from tbl_stakeholder where shId = #{shId}
+    </select>
+
+    <select id="selectByShWkId" resultType="org.hgtech.worksystem.domain.StakeholderVO">
+        select * from tbl_stakeholder where shWkId = #{shWkId}
+    </select>
+
+    <select id="selectLast" resultType="org.hgtech.worksystem.domain.StakeholderVO">
+        select * from tbl_stakeholder order by shId desc limit 1
+    </select>
+
+    <delete id="delete">
+        delete from tbl_stakeholder where shId = #{shId}
+    </delete>
+
+    <update id="update">
+        update tbl_stakeholder set shRegDate = #{shRegDate}, shModDate = #{shModDate}, shName = #{shName}, shCompany = #{shCompany}, shMobile = #{shMobile}, shPhone = #{shPhone}, shEmail = #{shEmail}, shAddress = #{shAddress}, shWkId = #{shWkId} where shId= #{shId}
+    </update>
+</mapper>

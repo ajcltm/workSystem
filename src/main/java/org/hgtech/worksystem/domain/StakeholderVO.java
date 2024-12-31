@@ -5,11 +5,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StakeHolderVO {
+public class StakeholderVO {
     int shId;
     LocalDateTime shRegDate;
     LocalDateTime shModDate;
@@ -19,5 +20,5 @@ public class StakeHolderVO {
     String shPhone;
     String shEmail;
     String shAddress;
-    String shWkId;
+    int shWkId;
 }

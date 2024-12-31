@@ -1,41 +1,33 @@
 package org.hgtech.worksystem.repositoryTest;
 
-import org.hgtech.worksystem.domain.WorkVO;
+import org.hgtech.worksystem.domain.FileVO;
+import org.hgtech.worksystem.repository.FileRepository;
 import org.hgtech.worksystem.repository.WorkRepository;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 @SpringBootTest
-public class WorkRepositoryTest {
-
+public class FileRepositoryTest {
     @Autowired
-    WorkRepository repository;
+    FileRepository repository;
 
-    public WorkVO createVO() {
-//      VO 객체 생성 
-        WorkVO vo = WorkVO.builder()
-                .wkId(createRandomNumber())
-                .wkRegDate(createRandomDatetime())
-                .wkModDate(createRandomDatetime())
-                .wkRepDate(createRandomDatetime())
-                .wkTtl(createRandomString())
-                .wkDsc(createRandomString())
-                .wkDueDate(createRandomDatetime())
-                .wkTag(createRandomString())
-                .wkImp(createRandomString())
-                .wkUser(createRandomNumber())
-                .wkResUser(createRandomNumber())
-                .wkParent(createRandomNumber())
-                .wkRank(createRandomNumber())
+    public FileVO createVO() {
+//      VO 객체 생성
+        FileVO vo = FileVO.builder()
+                .wfId(createRandomNumber())
+                .wfRegDate(createRandomDatetime())
+                .wfModDate(createRandomDatetime())
+                .wfName(createRandomString())
+                .wfPath(createRandomString())
+                .wfType(createRandomString())
+                .wfWkId(createRandomNumber())
                 .build();
         return vo;
     }
@@ -84,20 +76,20 @@ public class WorkRepositoryTest {
     public void selectByIdTest () {
         repository.insert(createVO());
 //      id 속성 이름 확인 필요
-        Assertions.assertEquals(repository.selectLast().getWkId(), repository.selectByWkId(repository.selectLast().getWkId()).getWkId());
+        Assertions.assertEquals(repository.selectLast().getWfId(), repository.selectByWfId(repository.selectLast().getWfId()).getWfId());
     }
 
     @Test
     public void selectByParentIdTest () {
         repository.insert(createVO());
 //      Foriegn Id 확인 필요
-        Assertions.assertEquals(repository.selectLast().getWkParent(), repository.selectByParent(repository.selectLast().getWkParent()).get(0).getWkParent());
+        Assertions.assertEquals(repository.selectLast().getWfWkId(), repository.selectByWfWkId(repository.selectLast().getWfWkId()).get(0).getWfWkId());
     }
 
     @Test
     public void deleteTest() {
         repository.insert(createVO());
-        int result = repository.delete(repository.selectLast().getWkId());
+        int result = repository.delete(repository.selectLast().getWfId());
         Assertions.assertEquals(result,1);
     }
 
@@ -105,10 +97,10 @@ public class WorkRepositoryTest {
     public void updateTest(){
         repository.insert(createVO());
 //      수정하고자 하는 속성 이름과 해당 객체 확인 필요
-        String input = repository.selectLast().getWkTtl();
-        WorkVO vo = repository.selectLast();
-        vo.setWkTtl(createRandomString());
+        String input = repository.selectLast().getWfName();
+        FileVO vo = repository.selectLast();
+        vo.setWfName(createRandomString());
         repository.update(vo);
-        Assertions.assertNotEquals(input, repository.selectLast().getWkTtl());
+        Assertions.assertNotEquals(input, repository.selectLast().getWfName());
     }
 }

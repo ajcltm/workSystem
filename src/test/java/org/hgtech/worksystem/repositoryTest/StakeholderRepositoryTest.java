@@ -1,41 +1,36 @@
 package org.hgtech.worksystem.repositoryTest;
 
-import org.hgtech.worksystem.domain.WorkVO;
-import org.hgtech.worksystem.repository.WorkRepository;
-import org.springframework.boot.test.context.SpringBootTest;
-
+import org.hgtech.worksystem.domain.FileVO;
+import org.hgtech.worksystem.domain.StakeholderVO;
+import org.hgtech.worksystem.repository.FileRepository;
+import org.hgtech.worksystem.repository.StakeholderRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 @SpringBootTest
-public class WorkRepositoryTest {
-
+public class StakeholderRepositoryTest {
     @Autowired
-    WorkRepository repository;
+    StakeholderRepository repository;
 
-    public WorkVO createVO() {
-//      VO 객체 생성 
-        WorkVO vo = WorkVO.builder()
-                .wkId(createRandomNumber())
-                .wkRegDate(createRandomDatetime())
-                .wkModDate(createRandomDatetime())
-                .wkRepDate(createRandomDatetime())
-                .wkTtl(createRandomString())
-                .wkDsc(createRandomString())
-                .wkDueDate(createRandomDatetime())
-                .wkTag(createRandomString())
-                .wkImp(createRandomString())
-                .wkUser(createRandomNumber())
-                .wkResUser(createRandomNumber())
-                .wkParent(createRandomNumber())
-                .wkRank(createRandomNumber())
+    public StakeholderVO createVO() {
+//      VO 객체 생성
+        StakeholderVO vo = StakeholderVO.builder()
+                .shId(createRandomNumber())
+                .shRegDate(createRandomDatetime())
+                .shModDate(createRandomDatetime())
+                .shName(createRandomString())
+                .shMobile(createRandomString())
+                .shPhone(createRandomString())
+                .shEmail(createRandomString())
+                .shAddress(createRandomString())
+                .shWkId(createRandomNumber())
                 .build();
         return vo;
     }
@@ -84,20 +79,20 @@ public class WorkRepositoryTest {
     public void selectByIdTest () {
         repository.insert(createVO());
 //      id 속성 이름 확인 필요
-        Assertions.assertEquals(repository.selectLast().getWkId(), repository.selectByWkId(repository.selectLast().getWkId()).getWkId());
+        Assertions.assertEquals(repository.selectLast().getShId(), repository.selectByShId(repository.selectLast().getShId()).getShId());
     }
 
     @Test
-    public void selectByParentIdTest () {
+    public void selectByShWkIdTest () {
         repository.insert(createVO());
 //      Foriegn Id 확인 필요
-        Assertions.assertEquals(repository.selectLast().getWkParent(), repository.selectByParent(repository.selectLast().getWkParent()).get(0).getWkParent());
+        Assertions.assertEquals(repository.selectLast().getShWkId(), repository.selectByShWkId(repository.selectLast().getShWkId()).get(0).getShWkId());
     }
 
     @Test
     public void deleteTest() {
         repository.insert(createVO());
-        int result = repository.delete(repository.selectLast().getWkId());
+        int result = repository.delete(repository.selectLast().getShId());
         Assertions.assertEquals(result,1);
     }
 
@@ -105,10 +100,10 @@ public class WorkRepositoryTest {
     public void updateTest(){
         repository.insert(createVO());
 //      수정하고자 하는 속성 이름과 해당 객체 확인 필요
-        String input = repository.selectLast().getWkTtl();
-        WorkVO vo = repository.selectLast();
-        vo.setWkTtl(createRandomString());
+        String input = repository.selectLast().getShName();
+        StakeholderVO vo = repository.selectLast();
+        vo.setShName(createRandomString());
         repository.update(vo);
-        Assertions.assertNotEquals(input, repository.selectLast().getWkTtl());
+        Assertions.assertNotEquals(input, repository.selectLast().getShName());
     }
 }
