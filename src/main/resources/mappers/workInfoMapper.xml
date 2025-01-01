@@ -5,22 +5,19 @@
     <!-- WorkInfoVO ResultMap -->
     <resultMap id="WorkInfoVOResultMap" type="org.hgtech.worksystem.domain.WorkInfoVO">
         <!-- WorkVO -->
-        <association property="workVO" javaType="org.hgtech.worksystem.domain.WorkVO">
-            <id property="wkId" column="Work_wkId"/>
-            <result property="wkRegDate" column="Work_RegDate"/>
-            <result property="wkModDate" column="Work_ModDate"/>
-            <result property="wkRepDate" column="Work_RepDate"/>
-            <result property="wkTtl" column="Work_Title"/>
-            <result property="wkDsc" column="Work_Description"/>
-            <result property="wkDueDate" column="Work_DueDate"/>
-            <result property="wkUser" column="Work_User"/>
-            <result property="wkResUser" column="Work_ResUser"/>
-            <result property="wkTag" column="Work_Tag"/>
-            <result property="wkImp" column="Work_Importance"/>
-            <result property="wkParent" column="Work_Parent"/>
-            <result property="wkRank" column="Work_Rank"/>
-        </association>
-
+        <id property="wkId" column="WorkId"/>
+        <result property="wkRegDate" column="Work_RegDate"/>
+        <result property="wkModDate" column="Work_ModDate"/>
+        <result property="wkRepDate" column="Work_RepDate"/>
+        <result property="wkTtl" column="Work_Title"/>
+        <result property="wkDsc" column="Work_Description"/>
+        <result property="wkDueDate" column="Work_DueDate"/>
+        <result property="wkUser" column="Work_User"/>
+        <result property="wkResUser" column="Work_ResUser"/>
+        <result property="wkTag" column="Work_Tag"/>
+        <result property="wkImp" column="Work_Importance"/>
+        <result property="wkParent" column="Work_Parent"/>
+        <result property="wkRank" column="Work_Rank"/>
         <!-- FileVO -->
         <collection property="fileVO" ofType="org.hgtech.worksystem.domain.FileVO">
             <id property="wfId" column="File_wfId"/>
@@ -31,8 +28,7 @@
             <result property="wfType" column="File_Type"/>
             <result property="wfWkId" column="File_WorkId"/>
         </collection>
-
-        <!-- StakeholderVO -->
+        <!-- StakeholderVO Collection -->
         <collection property="stakeholderVO" ofType="org.hgtech.worksystem.domain.StakeholderVO">
             <id property="shId" column="Stakeholder_shId"/>
             <result property="shRegDate" column="Stakeholder_RegDate"/>

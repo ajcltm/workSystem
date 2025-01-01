@@ -2,6 +2,7 @@ package org.hgtech.worksystem.domain;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -11,7 +12,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WorkInfoVO {
-    WorkVO workVO;
+    int wkId;
+    LocalDateTime wkRegDate;
+    LocalDateTime wkModDate;
+    LocalDateTime wkRepDate;
+    String wkTtl;
+    String wkDsc;
+    LocalDateTime wkDueDate;
+    int wkUser;
+    int wkResUser;
+    String wkTag;
+    String wkImp;
+    int wkParent;
+    int wkRank;
     List<FileVO> fileVO;
     List<StakeholderVO> stakeholderVO;
 }
