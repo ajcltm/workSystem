@@ -1,15 +1,11 @@
 package org.hgtech.worksystem.serviceTest;
 
-
-import org.hgtech.worksystem.DTO.FileDTO;
 import org.hgtech.worksystem.DTO.StakeholderDTO;
-import org.hgtech.worksystem.service.FileService;
 import org.hgtech.worksystem.service.StakeholderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

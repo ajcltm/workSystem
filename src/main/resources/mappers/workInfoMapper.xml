@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hgtech.worksystem.repository.WorkInfoRepository">
+
+    <!-- WorkInfoVO ResultMap -->
+    <resultMap id="WorkInfoVOResultMap" type="org.hgtech.worksystem.domain.WorkInfoVO">
+        <!-- WorkVO -->
+        <association property="workVO" javaType="org.hgtech.worksystem.domain.WorkVO">
+            <id property="wkId" column="Work_wkId"/>
+            <result property="wkRegDate" column="Work_RegDate"/>
+            <result property="wkModDate" column="Work_ModDate"/>
+            <result property="wkRepDate" column="Work_RepDate"/>
+            <result property="wkTtl" column="Work_Title"/>
+            <result property="wkDsc" column="Work_Description"/>
+            <result property="wkDueDate" column="Work_DueDate"/>
+            <result property="wkUser" column="Work_User"/>
+            <result property="wkResUser" column="Work_ResUser"/>
+            <result property="wkTag" column="Work_Tag"/>
+            <result property="wkImp" column="Work_Importance"/>
+            <result property="wkParent" column="Work_Parent"/>
+            <result property="wkRank" column="Work_Rank"/>
+        </association>
+
+        <!-- FileVO -->
+        <collection property="fileVO" ofType="org.hgtech.worksystem.domain.FileVO">
+            <id property="wfId" column="File_wfId"/>
+            <result property="wfRegDate" column="File_RegDate"/>
+            <result property="wfModDate" column="File_ModDate"/>
+            <result property="wfName" column="File_Name"/>
+            <result property="wfPath" column="File_Path"/>
+            <result property="wfType" column="File_Type"/>
+            <result property="wfWkId" column="File_WorkId"/>
+        </collection>
+
+        <!-- StakeholderVO -->
+        <collection property="stakeholderVO" ofType="org.hgtech.worksystem.domain.StakeholderVO">
+            <id property="shId" column="Stakeholder_shId"/>
+            <result property="shRegDate" column="Stakeholder_RegDate"/>
+            <result property="shModDate" column="Stakeholder_ModDate"/>
+            <result property="shName" column="Stakeholder_Name"/>
+            <result property="shCompany" column="Stakeholder_Company"/>
+            <result property="shMobile" column="Stakeholder_Mobile"/>
+            <result property="shPhone" column="Stakeholder_Phone"/>
+            <result property="shEmail" column="Stakeholder_Email"/>
+            <result property="shAddress" column="Stakeholder_Address"/>
+            <result property="shWkId" column="Stakeholder_WorkId"/>
+        </collection>
+    </resultMap>
+
+    <!-- Recursive SQL Query -->
+    <select id="selectAll" resultMap="WorkInfoVOResultMap">
+        WITH RECURSIVE WorkHierarchy AS (
+            SELECT
+                wkId,
+                wkRank,
+                wkParent,
+                CAST(wkRank AS CHAR(255)) AS Path,
+                0 AS Level
+            FROM tbl_work
+            WHERE wkParent IS NULL
+
+            UNION ALL
+
+            SELECT
+                w.wkId,
+                w.wkRank,
+                w.wkParent,
+                CONCAT(wh.Path, ' > ', CAST(w.wkRank AS CHAR(255))) AS Path,
+                wh.Level + 1 AS Level
+            FROM tbl_work w
+                     INNER JOIN WorkHierarchy wh ON w.wkParent = wh.wkRank
+        )
+        SELECT
+            -- WorkHierarchy 필드
+            wh.wkId AS WorkID,
+            wh.wkRank AS RankID,
+            wh.wkParent AS ParentID,
+            wh.Path AS WorkPath,
+            wh.Level AS WorkLevel,
+
+            -- tbl_work 테이블 모든 필드
+            w.wkId AS Work_wkId,
+            w.wkRegDate AS Work_RegDate,
+            w.wkModDate AS Work_ModDate,
+            w.wkRepDate AS Work_RepDate,
+            w.wkTtl AS Work_Title,
+            w.wkDsc AS Work_Description,
+            w.wkDueDate AS Work_DueDate,
+            w.wkUser AS Work_User,
+            w.wkResUser AS Work_ResUser,
+            w.wkTag AS Work_Tag,
+            w.wkImp AS Work_Importance,
+            w.wkParent AS Work_Parent,
+            w.wkRank AS Work_Rank,
+
+            -- tbl_file 테이블 모든 필드
+            f.wfId AS File_wfId,
+            f.wfRegDate AS File_RegDate,
+            f.wfModDate AS File_ModDate,
+            f.wfName AS File_Name,
+            f.wfPath AS File_Path,
+            f.wfType AS File_Type,
+            f.wfWkId AS File_WorkId,
+
+            -- tbl_stakeholder 테이블 모든 필드
+            s.shId AS Stakeholder_shId,
+            s.shRegDate AS Stakeholder_RegDate,
+            s.shModDate AS Stakeholder_ModDate,
+            s.shName AS Stakeholder_Name,
+            s.shCompany AS Stakeholder_Company,
+            s.shMobile AS Stakeholder_Mobile,
+            s.shPhone AS Stakeholder_Phone,
+            s.shEmail AS Stakeholder_Email,
+            s.shAddress AS Stakeholder_Address,
+            s.shWkId AS Stakeholder_WorkId
+        FROM WorkHierarchy wh
+                 LEFT JOIN tbl_work w ON wh.wkId = w.wkId
+                 LEFT JOIN tbl_file f ON w.wkId = f.wfWkId
+                 LEFT JOIN tbl_stakeholder s ON w.wkId = s.shWkId
+        ORDER BY wh.Path, wh.Level;
+    </select>
+</mapper>
