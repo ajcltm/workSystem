@@ -111,4 +111,5 @@ public class WorkRepositoryTest {
         repository.update(vo);
         Assertions.assertNotEquals(input, repository.selectLast().getWkTtl());
     }
+
 }

@@ -1,6 +1,8 @@
-package org.hgtech.worksystem.domain;
+package org.hgtech.worksystem.DTO;
 
 import lombok.*;
+import org.hgtech.worksystem.domain.FileVO;
+import org.hgtech.worksystem.domain.StakeholderVO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkInfoVO {
+public class WorkInfoDTO {
     int wkId;
     LocalDateTime wkRegDate;
     LocalDateTime wkModDate;

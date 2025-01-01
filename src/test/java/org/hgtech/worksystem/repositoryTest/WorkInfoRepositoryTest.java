@@ -21,4 +21,31 @@ public class WorkInfoRepositoryTest {
             System.out.println(workInfo);
         }
     }
+
+    @Test
+    public void selectByParent() {
+        List<WorkInfoVO> workInfoVO = repository.selectByParent(1);
+        for (WorkInfoVO workInfo:workInfoVO) {
+            System.out.println(workInfo);
+        }
+    }
+
+    @Test
+    public void selectLastAboveTest() {
+        WorkInfoVO workInfoVO = repository.selectLastAbove(0, 5);
+        System.out.println(workInfoVO);
+        }
+
+    @Test
+    public void selectFirstBelowTest() {
+        WorkInfoVO workInfoVO = repository.selectFirstBelow(0, 5);
+        System.out.println(workInfoVO);
+    }
+
+    @Test
+    public void selectByRank() {
+        WorkInfoVO workInfoVO = repository.selectByRank(5);
+        System.out.println(workInfoVO);
+    }
+
 }
