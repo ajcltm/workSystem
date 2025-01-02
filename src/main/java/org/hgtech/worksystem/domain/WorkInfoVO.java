@@ -12,20 +12,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WorkInfoVO {
-    int wkId;
+    Integer wkId;
     LocalDateTime wkRegDate;
     LocalDateTime wkModDate;
     LocalDateTime wkRepDate;
     String wkTtl;
     String wkDsc;
     LocalDateTime wkDueDate;
-    int wkUser;
-    int wkResUser;
+    Integer wkUser;
+    Integer wkResUser;
     String wkTag;
     String wkImp;
-    int wkParent;
-    int wkRank;
-    int wkLevel;
+    Integer wkParent;
+    Integer wkRank;
+    Integer wkLevel;
     String wkPath;
     List<FileVO> fileVO;
     List<StakeholderVO> stakeholderVO;

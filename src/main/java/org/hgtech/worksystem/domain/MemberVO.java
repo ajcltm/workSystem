@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberVO {
-    int mbId;
+    Integer mbId;
     LocalDateTime mbRegDate;
     LocalDateTime mbModDate;
     String mbUserName;

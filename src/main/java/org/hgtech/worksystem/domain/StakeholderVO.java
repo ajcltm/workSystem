@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StakeholderVO {
-    int shId;
+    Integer shId;
     LocalDateTime shRegDate;
     LocalDateTime shModDate;
     String shName;
@@ -20,5 +20,5 @@ public class StakeholderVO {
     String shPhone;
     String shEmail;
     String shAddress;
-    int shWkId;
+    Integer shWkId;
 }

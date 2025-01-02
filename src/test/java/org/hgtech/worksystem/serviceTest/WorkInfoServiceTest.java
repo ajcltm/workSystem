@@ -31,4 +31,13 @@ public class WorkInfoServiceTest {
             System.out.println(workInfoDTO);
         }
     }
+
+    @Test
+    public void rankBelowTest() {
+        service.rankDown(1);
+        List<WorkInfoDTO> result = service.getAll();
+        for (WorkInfoDTO workInfoDTO : result) {
+            System.out.println(workInfoDTO);
+        }
+    }
 }
