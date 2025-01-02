@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.plaf.PanelUI;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +22,12 @@ public class WorkService {
     ModelMapper mapper = new ModelMapper();
 
     public int register(WorkDTO workDTO) {
-        return repository.insert(mapper.map(workDTO, WorkVO.class));
+        workDTO.setWkRegDate(LocalDateTime.now());
+        workDTO.setWkModDate(LocalDateTime.now());
+        repository.insert(mapper.map(workDTO, WorkVO.class));
+        workDTO.setWkRank(repository.selectLast().getWkId());
+        repository.update(mapper.map(workDTO, WorkVO.class));
+        return 1;
     }
 
     public WorkDTO getLast() {
@@ -43,48 +51,60 @@ public class WorkService {
     }
 
     public int modify(WorkDTO workDTO) {
+        workDTO.setWkModDate(LocalDateTime.now());
         return repository.update(mapper.map(workDTO, WorkVO.class));
     }
 
-//    public void changeParent(int parent, int wkId) {
-////        변경 대상 레코드 조회
-//        WorkVO currentVO = repository.selectByWkId(wkId);
-//        int currentRank = currentVO.getWkRank();
-////        parent의 자식 레크드 조회
-//        List<WorkVO> workVOList = repository.selectByParent(parent);
-//        if (workVOList != null) {
-//            int maxRank = 0 ;
-//            WorkVO maxVO = null;
-//            for (WorkVO vo: workVOList) {
-//                int rank = vo.getWkRank();
-//                if (rank > maxRank) {
-//                    maxRank = rank;
-//                    maxVO = vo;
-//                }
-//            }
-//            currentVO.setWkRank(maxRank);
-//            maxVO.setWkRank(currentRank);
-//            repository.update(maxVO);
-//
-//            List<WorkVO> currentChild = repository.selectByParent(currentRank);
-//            if (currentChild != null) {
-//                for (WorkVO vo: currentChild) {
-//                    vo.setWkParent(maxRank);
-//                    repository.update(vo);
-//                }
-//            }
-//
-//            List<WorkVO> maxChild = repository.selectByParent(maxRank);
-//            if (maxChild != null) {
-//                for (WorkVO vo: maxChild) {
-//                    vo.setWkParent(currentRank);
-//                    repository.update(vo);
-//                }
-//            }
-//        }
-//
-////        parent 변경
-//        currentVO.setWkParent(parent);
-//        repository.update(currentVO);
-//    }
+    public void changeRank(int rank, WorkVO workVO) {
+        workVO.setWkRank(rank);
+        System.out.println("changeRank : " + workVO.getWkRank()+ " ->" + rank  + workVO);
+        repository.update(workVO);
+    }
+
+    public void changeParent(int parent, int wkId) {
+        WorkVO currentVO = repository.selectByWkId(wkId);
+        currentVO.setWkParent(parent);
+        repository.update(currentVO);
+        int currentRank = currentVO.getWkRank();
+
+        List<WorkVO> child = repository.selectByParent(parent);
+        if (child != null) {
+            Map<Integer, List<WorkVO>> map = new HashMap<>();
+            int forChangeNum = 0;
+            int maxNum = 0;
+            for (WorkVO vo:child) {
+                int rank = vo.getWkRank();
+                if (rank > maxNum) {
+                    maxNum = rank;
+                }
+                if (forChangeNum != 0) {
+                    map.put(forChangeNum, repository.selectByParent(vo.getWkRank()));
+                    changeRank(forChangeNum, vo);
+                    forChangeNum = rank;
+                }
+                if (rank > currentRank && forChangeNum == 0) {
+                    map.put(currentRank, repository.selectByParent(vo.getWkRank()));
+                    changeRank(currentRank, vo);
+                    forChangeNum = rank;
+                }
+            }
+            if (maxNum > currentRank) {
+                map.put(maxNum, repository.selectByParent(currentVO.getWkRank()));
+                changeRank(maxNum, currentVO);
+            }
+
+            for (Map.Entry<Integer, List<WorkVO>> entry : map.entrySet()) {
+                changParentBath(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    public void changParentBath(int rank, List<WorkVO> child) {
+        if (child != null) {
+            for (WorkVO vo: child) {
+                vo.setWkParent(rank);
+                repository.update(vo);
+            }
+        }
+    }
 }

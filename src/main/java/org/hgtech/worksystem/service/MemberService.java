@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ public class MemberService {
     ModelMapper mapper = new ModelMapper();
 
     public int register(MemberDTO memberDTO) {
+        memberDTO.setMbRegDate(LocalDateTime.now());
+        memberDTO.setMbModDate(LocalDateTime.now());
         return repository.insert(mapper.map(memberDTO, MemberVO.class));
     }
 
@@ -42,6 +45,7 @@ public class MemberService {
     }
 
     public int modify(MemberDTO memberDTO) {
+        memberDTO.setMbModDate(LocalDateTime.now());
         return repository.update(mapper.map(memberDTO, MemberVO.class));
     }
 }

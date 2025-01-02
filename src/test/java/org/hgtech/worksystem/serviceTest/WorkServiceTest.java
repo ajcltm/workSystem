@@ -109,4 +109,9 @@ public class WorkServiceTest {
         service.modify(dto);
         Assertions.assertNotEquals(input, service.getLast().getWkTtl());
     }
+
+    @Test
+    public void changeParent() {
+        service.changeParent(5, 1);
+    }
 }

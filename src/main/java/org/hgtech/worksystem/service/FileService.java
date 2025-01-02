@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,8 @@ public class FileService {
     ModelMapper mapper = new ModelMapper();
 
     public int register(FileDTO fileDTO) {
+        fileDTO.setWfRegDate(LocalDateTime.now());
+        fileDTO.setWfModDate(LocalDateTime.now());
         return repository.insert(mapper.map(fileDTO, FileVO.class));
     }
 
@@ -43,6 +46,7 @@ public class FileService {
     }
 
     public int modify(FileDTO fileDTO) {
+        fileDTO.setWfModDate(LocalDateTime.now());
         return repository.update(mapper.map(fileDTO, FileVO.class));
     }
 }

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,8 @@ public class StakeholderService {
     ModelMapper mapper = new ModelMapper();
 
     public int register(StakeholderDTO stakeholderDTO) {
+        stakeholderDTO.setShRegDate(LocalDateTime.now());
+        stakeholderDTO.setShModDate(LocalDateTime.now());
         return repository.insert(mapper.map(stakeholderDTO, StakeholderVO.class));
     }
 
@@ -46,6 +49,7 @@ public class StakeholderService {
     }
 
     public int modify(StakeholderDTO stakeholderDTO) {
+        stakeholderDTO.setShModDate(LocalDateTime.now());
         return repository.update(mapper.map(stakeholderDTO, StakeholderVO.class));
     }
 }
