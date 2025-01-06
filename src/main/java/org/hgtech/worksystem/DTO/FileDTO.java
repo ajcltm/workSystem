@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileDTO {
-    int wfId;
+    Integer wfId;
     LocalDateTime wfRegDate;
     LocalDateTime wfModDate;
     String wfName;
     String wfPath;
     String wfType;
-    int wfWkId;
+    Integer wfWkId;
+    Integer wfLgId;
 }

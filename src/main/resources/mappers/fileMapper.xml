@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hgtech.worksystem.repository.FileRepository">
     <insert id="insert">
-        insert into tbl_file (wfRegDate, wfModDate, wfName, wfPath, wfType, wfWkId) values (#{wfRegDate}, #{wfModDate}, #{wfName}, #{wfPath}, #{wfType}, #{wfWkId})
+        insert into tbl_file (wfRegDate, wfModDate, wfName, wfPath, wfType, wfWkId, wfLgId) values (#{wfRegDate}, #{wfModDate}, #{wfName}, #{wfPath}, #{wfType}, #{wfWkId}, #{wfLgId})
     </insert>
 
     <select id="selectAll" resultType="org.hgtech.worksystem.domain.FileVO">
@@ -17,6 +17,11 @@
         select * from tbl_file where wfWkId = #{wfWkId}
     </select>
 
+    <select id="selectByWfLgId" resultType="org.hgtech.worksystem.domain.FileVO">
+        select * from tbl_file where wfLgId = #{wfLgId}
+    </select>
+
+
     <select id="selectLast" resultType="org.hgtech.worksystem.domain.FileVO">
         select * from tbl_file order by wfId desc limit 1
     </select>
@@ -26,6 +31,6 @@
     </delete>
 
     <update id="update">
-        update tbl_file set wfRegDate = #{wfRegDate}, wfModDate = #{wfModDate}, wfName = #{wfName}, wfPath = #{wfPath}, wfType = #{wfType}, wfWkId = #{wfWkId} where wfId= #{wfId}
+        update tbl_file set wfRegDate = #{wfRegDate}, wfModDate = #{wfModDate}, wfName = #{wfName}, wfPath = #{wfPath}, wfType = #{wfType}, wfWkId = #{wfWkId}, wfLgId = #{wfLgId}  where wfId= #{wfId}
     </update>
 </mapper>

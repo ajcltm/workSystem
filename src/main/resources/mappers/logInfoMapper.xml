@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hgtech.worksystem.repository.LogInfoRepository">
+
+    <!-- WorkInfoVO ResultMap -->
+    <resultMap id="LogInfoVOResultMap" type="org.hgtech.worksystem.domain.LogInfoVO">
+        <!-- WorkVO -->
+        <id property="lgId" column="lgId"/>
+        <result property="lgRegDate" column="lgRegDate"/>
+        <result property="lgModDate" column="lgModDate"/>
+        <result property="lgRepDate" column="lgRepDate"/>
+        <result property="lgDsc" column="lgDsc"/>
+        <result property="lgTag" column="lgTag"/>
+        <result property="lgWkId" column="lgWkId"/>
+        <!-- FileVO -->
+        <collection property="fileVO" ofType="org.hgtech.worksystem.domain.FileVO">
+            <id property="wfId" column="wfId"/>
+            <result property="wfRegDate" column="wfRegDate"/>
+            <result property="wfModDate" column="wfModDate"/>
+            <result property="wfName" column="wfName"/>
+            <result property="wfPath" column="wfPath"/>
+            <result property="wfType" column="wfType"/>
+            <result property="wfWkId" column="wfWkId"/>
+            <result property="wfLgId" column="wfLgId"/>
+        </collection>
+        <!-- StakeholderVO Collection -->
+        <collection property="stakeholderVO" ofType="org.hgtech.worksystem.domain.StakeholderVO">
+            <id property="shId" column="shId"/>
+            <result property="shRegDate" column="shRegDate"/>
+            <result property="shModDate" column="shModDate"/>
+            <result property="shName" column="shName"/>
+            <result property="shCompany" column="shCompany"/>
+            <result property="shMobile" column="shMobile"/>
+            <result property="shPhone" column="shPhone"/>
+            <result property="shEmail" column="shEmail"/>
+            <result property="shAddress" column="shAddress"/>
+            <result property="shWkId" column="shWkId"/>
+        </collection>
+    </resultMap>
+
+    <!-- Recursive SQL Query -->
+    <select id="selectAll" resultMap="LogInfoVOResultMap">
+        select *
+        FROM tbl_log
+        LEFT JOIN tbl_file ON lgId = wfLgId
+        ORDER BY lgId;
+    </select>
+</mapper>

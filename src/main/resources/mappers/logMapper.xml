@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hgtech.worksystem.repository.LogRepository">
+    <insert id="insert">
+        insert into tbl_log (lgRegDate, lgModDate, lgRepDate, lgDsc, lgTag, lgWkId) values (#{lgRegDate}, #{lgModDate}, #{lgRepDate}, #{lgDsc}, #{lgTag}, #{lgWkId})
+    </insert>
+
+    <select id="selectAll" resultType="org.hgtech.worksystem.domain.LogVO">
+        select * from tbl_log
+    </select>
+
+    <select id="selectByLgId" resultType="org.hgtech.worksystem.domain.LogVO">
+        select * from tbl_log where lgId = #{lgId}
+    </select>
+
+    <select id="selectByLgWkId" resultType="org.hgtech.worksystem.domain.LogVO">
+        select * from tbl_log where lgWkId = #{lgWkId}
+    </select>
+
+    <select id="selectLast" resultType="org.hgtech.worksystem.domain.LogVO">
+        select * from tbl_log order by lgId desc limit 1
+    </select>
+
+    <delete id="delete">
+        delete from tbl_log where lgId = #{lgId}
+    </delete>
+
+    <update id="update">
+        update tbl_log set lgRegDate = #{lgRegDate}, lgModDate = #{lgModDate}, lgRepDate = #{lgRepDate}, lgDsc = #{lgDsc}, lgTag = #{lgTag}, lgWkId = #{lgWkId} where lgId= #{lgId}
+    </update>
+</mapper>

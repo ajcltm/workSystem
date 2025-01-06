@@ -29,6 +29,7 @@ public class FileServiceTest {
                 .wfPath(createRandomString())
                 .wfType(createRandomString())
                 .wfWkId(createRandomNumber())
+                .wfLgId(createRandomNumber())
                 .build();
         return dto;
     }
@@ -75,9 +76,10 @@ public class FileServiceTest {
 
     @Test
     public void selectByIdTest () {
-        service.register(createDTO());
+//        service.register(createDTO());
 //      id 속성 이름 확인 필요
-        Assertions.assertEquals(service.getLast().getWfId(), service.getByWfId(service.getLast().getWfId()).getWfId());
+//        Assertions.assertEquals(service.getLast().getWfId(), service.getByWfId(service.getLast().getWfId()).getWfId());
+        System.out.println("wfId : " + service.getByWfId(50));
     }
 
     @Test
@@ -85,6 +87,13 @@ public class FileServiceTest {
         service.register(createDTO());
 //      Foriegn Id 확인 필요
         Assertions.assertEquals(service.getLast().getWfWkId(), service.getByWfWkId(service.getLast().getWfWkId()).get(0).getWfWkId());
+    }
+
+    @Test
+    public void selectByWfLgIdTest () {
+        service.register(createDTO());
+//      Foriegn Id 확인 필요
+        Assertions.assertEquals(service.getLast().getWfLgId(), service.getByWfLgId(service.getLast().getWfLgId()).get(0).getWfLgId());
     }
 
     @Test

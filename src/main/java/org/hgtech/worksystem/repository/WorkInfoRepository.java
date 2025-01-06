@@ -8,9 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface WorkInfoRepository {
-    public List<WorkInfoVO> selectAll();
-    WorkInfoVO selectByRank(int rank);
-    List<WorkInfoVO> selectByParent(int parent);
-    WorkInfoVO selectLastAbove(int level , int rank);
-    WorkInfoVO selectFirstBelow(int level , int rank);
+    public List<WorkInfoVO> selectAll(int mbId);
 }

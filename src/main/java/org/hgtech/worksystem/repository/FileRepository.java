@@ -12,6 +12,7 @@ public interface FileRepository {
     FileVO selectLast();
     FileVO selectByWfId(int wfId);
     List<FileVO> selectByWfWkId(int wfWkId);
+    List<FileVO> selectByWfLgId(int wfLgId);
     int delete(int wfId);
     int update(FileVO fileVO);
 }

@@ -14,7 +14,14 @@
     </select>
 
     <select id="selectByParent" resultType="org.hgtech.worksystem.domain.WorkVO">
-        select * from tbl_work where wkParent = #{wkParent}
+        select * from tbl_work
+            where
+            <if test="wkParent != null">
+                wkParent = #{parent}
+            </if>
+            <if test="wkParent == null">
+                wkParent IS NULL
+            </if>
     </select>
 
     <select id="selectLast" resultType="org.hgtech.worksystem.domain.WorkVO">
@@ -28,4 +35,34 @@
     <update id="update">
         update tbl_work set wkRegDate = #{wkRegDate}, wkModDate = #{wkModDate}, wkRepDate = #{wkRepDate}, wkTtl = #{wkTtl}, wkDsc = #{wkDsc}, wkDueDate = #{wkDueDate}, wkUser = #{wkUser}, wkResUser = #{wkResUser}, wkTag = #{wkTag}, wkImp = #{wkImp}, wkParent = #{wkParent}, wkRank = #{wkRank} where wkId= #{wkId}
     </update>
+
+    <select id="selectLastAbove" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select *
+        from tbl_work
+        where
+        <if test="parent != null">
+            wkParent = #{parent}
+        </if>
+        <if test="parent == null">
+            wkParent IS NULL
+        </if>
+        and #{rank} > wkRank
+        order by wkRank
+        Desc limit 1
+    </select>
+
+
+    <select id="selectFirstBelow" resultType="org.hgtech.worksystem.domain.WorkVO">
+        select *
+        from tbl_work
+        where
+        <if test="parent != null">
+            wkParent = #{parent}
+        </if>
+        <if test="parent == null">
+            wkParent IS NULL
+        </if>
+        and wkRank > #{rank}
+        order by wkRank asc limit 1
+    </select>
 </mapper>

@@ -1,9 +1,9 @@
 package org.hgtech.worksystem.serviceTest;
 
-import org.hgtech.worksystem.DTO.WorkDTO;
-import org.hgtech.worksystem.DTO.WorkInfoDTO;
-import org.hgtech.worksystem.domain.WorkVO;
-import org.hgtech.worksystem.service.WorkService;
+import org.hgtech.worksystem.DTO.LogDTO;
+import org.hgtech.worksystem.DTO.StakeholderDTO;
+import org.hgtech.worksystem.service.LogService;
+import org.hgtech.worksystem.service.StakeholderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +11,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 @SpringBootTest
-public class WorkServiceTest {
+public class LogServiceTest {
     @Autowired
-    WorkService service;
+    LogService service;
 
-    public WorkDTO createDTO() {
+    public LogDTO createDTO() {
 //      VO 객체 생성
-        WorkDTO dto = WorkDTO.builder()
-                .wkRegDate(createRandomDatetime())
-                .wkModDate(createRandomDatetime())
-                .wkRepDate(createRandomDatetime())
-                .wkTtl(createRandomString())
-                .wkDsc(createRandomString())
-                .wkDueDate(createRandomDatetime())
-                .wkTag(createRandomString())
-                .wkImp(createRandomString())
-                .wkUser(createRandomNumber())
-                .wkResUser(createRandomNumber())
-                .wkParent(createRandomNumber())
-                .wkRank(createRandomNumber())
+        LogDTO dto = LogDTO.builder()
+                .lgId(createRandomNumber())
+                .lgRegDate(createRandomDatetime())
+                .lgModDate(createRandomDatetime())
+                .lgRepDate(createRandomDatetime())
+                .lgDsc(createRandomString())
+                .lgTag(createRandomString())
+                .lgWkId(createRandomNumber())
                 .build();
         return dto;
     }
@@ -83,20 +77,20 @@ public class WorkServiceTest {
     public void selectByIdTest () {
         service.register(createDTO());
 //      id 속성 이름 확인 필요
-        Assertions.assertEquals(service.getLast().getWkId(), service.getByWkId(service.getLast().getWkId()).getWkId());
+        Assertions.assertEquals(service.getLast().getLgId(), service.getByWfId(service.getLast().getLgId()).getLgId());
     }
 
     @Test
     public void selectByParentIdTest () {
         service.register(createDTO());
 //      Foriegn Id 확인 필요
-        Assertions.assertEquals(service.getLast().getWkParent(), service.getByParent(service.getLast().getWkParent()).get(0).getWkParent());
+        Assertions.assertEquals(service.getLast().getLgWkId(), service.getByWfWkId(service.getLast().getLgWkId()).get(0).getLgWkId());
     }
 
     @Test
     public void deleteTest() {
         service.register(createDTO());
-        int result = service.remove(service.getLast().getWkId());
+        int result = service.remove(service.getLast().getLgId());
         Assertions.assertEquals(result,1);
     }
 
@@ -104,33 +98,10 @@ public class WorkServiceTest {
     public void updateTest(){
         service.register(createDTO());
 //      수정하고자 하는 속성 이름과 해당 객체 확인 필요
-        String input = service.getLast().getWkTtl();
-        WorkDTO dto = service.getLast();
-        dto.setWkTtl("수정");
+        String input = service.getLast().getLgTag();
+        LogDTO dto = service.getLast();
+        dto.setLgTag(createRandomString());
         service.modify(dto);
-        Assertions.assertNotEquals(input, service.getLast().getWkTtl());
-    }
-
-    @Test
-    public void changeParent() {
-        service.changeParent(5, 1);
-    }
-
-    @Test
-    public void rankUpTest() {
-        service.rankUp(1);
-        List<WorkDTO> result = service.getAll();
-        for (WorkDTO workDTO : result) {
-            System.out.println(workDTO);
-        }
-    }
-
-    @Test
-    public void rankBelowTest() {
-        service.rankDown(1);
-        List<WorkDTO> result = service.getAll();
-        for (WorkDTO workDTO : result) {
-            System.out.println(workDTO);
-        }
+        Assertions.assertNotEquals(input, service.getLast().getLgTag());
     }
 }

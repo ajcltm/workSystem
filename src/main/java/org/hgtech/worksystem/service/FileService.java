@@ -41,6 +41,10 @@ public class FileService {
         return repository.selectByWfWkId(id).stream().map(vo -> mapper.map(vo, FileDTO.class)).collect(Collectors.toList());
     }
 
+    public List<FileDTO> getByWfLgId(int id) {
+        return repository.selectByWfLgId(id).stream().map(vo -> mapper.map(vo, FileDTO.class)).collect(Collectors.toList());
+    }
+
     public int remove(int id) {
         return repository.delete(id);
     }

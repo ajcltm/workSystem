@@ -18,4 +18,5 @@ public class FileVO {
     String wfPath;
     String wfType;
     Integer wfWkId;
+    Integer wfLgId;
 }

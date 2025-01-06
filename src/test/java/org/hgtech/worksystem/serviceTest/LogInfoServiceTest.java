@@ -1,8 +1,9 @@
 package org.hgtech.worksystem.serviceTest;
 
+import org.hgtech.worksystem.DTO.LogInfoDTO;
 import org.hgtech.worksystem.DTO.WorkInfoDTO;
+import org.hgtech.worksystem.service.LogInfoService;
 import org.hgtech.worksystem.service.WorkInfoService;
-import org.hgtech.worksystem.service.WorkService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,16 +11,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-public class WorkInfoServiceTest {
+public class LogInfoServiceTest {
 
     @Autowired
-    WorkInfoService service;
+    LogInfoService service;
 
     @Test
     public void workInfoServiceTest() {
-        List<WorkInfoDTO> result = service.getAll(1);
-        for (WorkInfoDTO workInfoDTO : result) {
-            System.out.println(workInfoDTO);
+        List<LogInfoDTO> result = service.getAll();
+        for (LogInfoDTO logInfoDTO : result) {
+            System.out.println(logInfoDTO);
         }
     }
 }

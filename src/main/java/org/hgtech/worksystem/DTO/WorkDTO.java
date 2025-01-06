@@ -1,7 +1,9 @@
 package org.hgtech.worksystem.DTO;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -11,17 +13,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WorkDTO {
-    int wkId;
+    Integer wkId;
     LocalDateTime wkRegDate;
     LocalDateTime wkModDate;
     LocalDateTime wkRepDate;
     String wkTtl;
     String wkDsc;
     LocalDateTime wkDueDate;
-    int wkUser;
-    int wkResUser;
+    Integer wkUser;
+    Integer wkResUser;
     String wkTag;
     String wkImp;
-    int wkParent;
-    int wkRank;
+    Integer wkParent;
+    Integer wkRank;
 }
