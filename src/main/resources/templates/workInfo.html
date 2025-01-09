@@ -2,12 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style_workInfo.css}">
     <title>Title</title>
 </head>
 <body>
     <div th:fragment="workInfo">
-        <ul>
-            <li th:each="item : ${workInfo}" th:text="${item}"></li>
+        <div class="bl_data_util_box">
+            <button class="bl_data_util_button">변경</button>
+            <button class="bl_data_util_button">올리기</button>
+            <button class="bl_data_util_button">내리기</button>
+        </div>
+        <ul class="bl_data_body">
+            <li class="bl_data_item" th:each="work : ${workInfo}">
+                <div class="bl_data_item_subBox"></div>
+                <div class="bl_data_item_box">
+                    <span class="bl_data_item_date" th:text="${work.wkRepDate}"></span>
+                    <span class="bl_data_item_text" th:text="${work.wkTtl}"></span>
+                    <span class="bl_data_item_text hp_data_item_text_long" th:text="${work.wkDsc}"></span>
+                    <div class="bl_data_util_box">
+                        <button class="bl_data_util_button">편집</button>
+                        <button class="bl_data_util_button">삭제</button>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 </body>

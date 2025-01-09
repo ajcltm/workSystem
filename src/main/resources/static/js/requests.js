@@ -37,9 +37,9 @@ async function sendRequest(url_key, options = {}) {
 
 // ====================== workInfo =======================
 
-async function workInfo() {
+async function workInfo(id) {
 
-    const url = "/workSystem/workInfo/data"
+    const url = "/workSystem/workInfo/data/" + id;
     const response = await sendRequest(url)
     return response;
 }

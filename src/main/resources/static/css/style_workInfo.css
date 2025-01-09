@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*border: 1px solid blue;*/
+    outline: 1px solid blue;
+}
+
+/* ========= bl_data =========== */
+
+.bl_data_util_box {
+    padding: .5rem;
+    text-align: right;
+}

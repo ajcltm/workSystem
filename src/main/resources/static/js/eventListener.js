@@ -5,10 +5,11 @@ const workList = document.getElementById("wklst");
 
 // ============= workInfo event handler =========================
 
-async function handleWorkInfo() {
-    const response = await workInfo();
+async function handleWorkInfo(id) {
+    const response = await workInfo(id);
     const html = await response.text()
     console.log("handleWorkInfo");
+    console.log("html : " + html);
     document.getElementById("workInfo").innerHTML = html;
 }
 

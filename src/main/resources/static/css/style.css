@@ -6,6 +6,8 @@
     outline: 1px solid blue;
 }
 
+/* ========= layout =========== */
+
 .ly_header {
     height: 10vh;
 }
@@ -75,4 +77,19 @@
 
 .ly_footer {
     height: 5vh;
+}
+
+/* ========= bl_data =========== */
+
+.bl_data_util_box {
+    padding: .5rem;
+    text-align: right;
+}
+
+.bl_data_item_box {
+    display: flex;
+}
+
+.hp_data_item_text_long {
+    flex-grow: 1 ;
 }
