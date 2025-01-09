@@ -18,7 +18,7 @@ public class logInfoRepositoryTest {
 
     @Test
     public void selectAllTest() {
-        List<LogInfoVO> logInfoVOS = repository.selectAll();
+        List<LogInfoVO> logInfoVOS = repository.selectAll(1);
         for (LogInfoVO vo:logInfoVOS) {
             System.out.println(vo);
         }

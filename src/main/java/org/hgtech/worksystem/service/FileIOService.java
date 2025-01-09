@@ -34,11 +34,25 @@ public class FileIOService {
         fileService.register(fileDTO);
     }
 
-    public File downloadFile(int id) {
+    public File load(int id) {
 //        파일 기록 가져오기
         FileDTO fileDTO = fileService.getByWfId(id);
 //        파일 불러오기
         File file = new File(fileDTO.getWfPath());
+        System.out.println("file exists : " + file.exists());
         return file;
+
+    }
+
+    public void remove(int id) {
+        //        파일 기록 가져오기
+        FileDTO fileDTO = fileService.getByWfId(id);
+//        파일 불러오기
+        File file = new File(fileDTO.getWfPath());
+        System.out.println(file.exists());
+        if (file.exists()) {
+            file.delete();
+        }
+        fileService.remove(id);
     }
 }

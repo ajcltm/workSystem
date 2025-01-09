@@ -43,4 +43,10 @@ public class workController {
         workService.rankDown((wkId));
         return ResponseEntity.status(HttpStatus.CREATED).body("rankDown : " + wkId);
     }
+
+    @GetMapping("workSystem/work/changeParent")
+    public ResponseEntity<String> changeParent(@RequestParam int parent, int wkId) {
+        workService.changeParent(parent, wkId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("changeParent - parent : " + parent + " wkId : " + wkId );
+    }
 }

@@ -21,5 +21,4 @@ public class LogInfoVO {
     String lgTag;
     Integer lgWkId;
     List<FileVO> fileVO;
-    List<StakeholderVO> stakeholderVO;
 }

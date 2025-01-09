@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface LogInfoRepository {
 
-    public List<LogInfoVO> selectAll();
+    List<LogInfoVO> selectAll(int wkId);
 }

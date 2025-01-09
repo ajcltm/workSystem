@@ -18,7 +18,7 @@ public class LogInfoServiceTest {
 
     @Test
     public void workInfoServiceTest() {
-        List<LogInfoDTO> result = service.getAll();
+        List<LogInfoDTO> result = service.getAll(1);
         for (LogInfoDTO logInfoDTO : result) {
             System.out.println(logInfoDTO);
         }

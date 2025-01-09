@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class FileIOController {
 
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadFile(@RequestParam int wfId) throws IOException {
-        File file = fileIOService.downloadFile(wfId);
+        File file = fileIOService.load(wfId);
         Resource resource = new FileSystemResource(file);
         String contentType = Files.probeContentType(Paths.get(file.getPath()));
         if(contentType == null) {
@@ -48,5 +49,11 @@ public class FileIOController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
                 .header(HttpHeaders.CONTENT_TYPE, contentType)
                 .body(resource);
+    }
+
+    @GetMapping("/remove")
+    public ResponseEntity<String> remove(@RequestParam int wfId) {
+        fileIOService.remove(wfId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("removed : " + wfId);
     }
 }

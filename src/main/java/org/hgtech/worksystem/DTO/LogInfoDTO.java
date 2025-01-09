@@ -22,5 +22,4 @@ public class LogInfoDTO {
     String lgTag;
     Integer lgWkId;
     List<FileVO> fileVO;
-    List<StakeholderVO> StakeholderVO;
 }

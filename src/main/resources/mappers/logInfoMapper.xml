@@ -23,19 +23,6 @@
             <result property="wfWkId" column="wfWkId"/>
             <result property="wfLgId" column="wfLgId"/>
         </collection>
-        <!-- StakeholderVO Collection -->
-        <collection property="stakeholderVO" ofType="org.hgtech.worksystem.domain.StakeholderVO">
-            <id property="shId" column="shId"/>
-            <result property="shRegDate" column="shRegDate"/>
-            <result property="shModDate" column="shModDate"/>
-            <result property="shName" column="shName"/>
-            <result property="shCompany" column="shCompany"/>
-            <result property="shMobile" column="shMobile"/>
-            <result property="shPhone" column="shPhone"/>
-            <result property="shEmail" column="shEmail"/>
-            <result property="shAddress" column="shAddress"/>
-            <result property="shWkId" column="shWkId"/>
-        </collection>
     </resultMap>
 
     <!-- Recursive SQL Query -->
@@ -43,6 +30,7 @@
         select *
         FROM tbl_log
         LEFT JOIN tbl_file ON lgId = wfLgId
+        WHERE lgWkId = #{wkId}
         ORDER BY lgId;
     </select>
 </mapper>

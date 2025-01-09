@@ -19,7 +19,7 @@ public class LogInfoService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public List<LogInfoDTO> getAll() {
-        return repository.selectAll().stream().map(vo -> modelMapper.map(vo, LogInfoDTO.class)).collect(Collectors.toList());
+    public List<LogInfoDTO> getAll(int wkId) {
+        return repository.selectAll(wkId).stream().map(vo -> modelMapper.map(vo, LogInfoDTO.class)).collect(Collectors.toList());
     }
 }
