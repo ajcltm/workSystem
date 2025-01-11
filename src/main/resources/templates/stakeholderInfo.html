@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="bl_data" th:fragment="stakeholderInfo">
+    <ul class="bl_data_body">
+        <li class="bl_data_item" th:each="stakeholder : ${stakeholderInfo}" th:attr="data-sh-id=${stakeholder.shId}">
+            <div class="bl_data_item_box">
+                <span class="bl_data_item_text" th:text="${stakeholder.shName}"></span>
+                <span class="bl_data_item_text" th:text="${stakeholder.shCompany}"></span>
+                <span class="bl_data_item_text" th:text="${stakeholder.shMobile}"></span>
+                <span class="bl_data_item_text" th:text="${stakeholder.shPhone}"></span>
+                <span class="bl_data_item_text" th:text="${stakeholder.shEmail}"></span>
+                <span class="bl_data_item_text" th:text="${stakeholder.shAddress}"></span>
+                <div class="bl_data_util_box">
+                    <button class="bl_data_util_button">편집</button>
+                    <button class="bl_data_util_button">삭제</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

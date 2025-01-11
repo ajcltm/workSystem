@@ -3,8 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     /*border: 1px solid blue;*/
-    outline: 1px solid blue;
+    outline: 1px solid rgba(0,0,0,.2);
+    /*background-color: rgba(0,0,0,.01);*/
 }
+
+
 
 /* ========= layout =========== */
 
@@ -79,15 +82,69 @@
     height: 5vh;
 }
 
+/* ========= bl_data_util_button =========== */
+.bl_data_util_button {
+    font-size: .8rem;
+}
+
+
 /* ========= bl_data =========== */
 
+.bl_data {
+    height: 100%;
+}
+
+.bl_data > *+* {
+    margin-block-start: .5rem;
+}
+
 .bl_data_util_box {
-    padding: .5rem;
+    padding: .25rem;
     text-align: right;
+}
+
+.bl_data_util_box > * {
+    margin-right: .25rem;
+}
+
+.bl_data_util_box > *:last-child {
+    margin-right: 0;
+}
+
+.bl_data_body {
+    height: 95%;
+    overflow-y: scroll;
+}
+
+.bl_data_body > *+* {
+    margin-block-start: .5rem;
 }
 
 .bl_data_item_box {
     display: flex;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.bl_data_item_box > * {
+    margin-right: .5rem;
+}
+
+.bl_data_item_box > *:last-child {
+    margin-right: 0;
+}
+
+
+.bl_data_item_subBox {
+    font-size: .7rem;
+}
+
+.bl_data_item_subBox > * {
+    margin-right: 1rem;
+}
+
+.bl_data_item_subBox > *:last-child {
+    margin-right: 0;
 }
 
 .hp_data_item_text_long {

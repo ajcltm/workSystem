@@ -108,11 +108,8 @@ async function workChangeParent(parent, id) {
 // ====================== logInfo =======================
 
 async function logInfo(id) {
-    const url = "/workSystem/logInfo/data"
-    const option = {
-        params: {wkId : id},
-    };
-    const response = await sendRequest(url, option)
+    const url = "/workSystem/logInfo/data/" + id;
+    const response = await sendRequest(url);
     return response;
 }
 
@@ -148,6 +145,12 @@ async function logModify(formData) {
 }
 
 // ====================== stakeholder =======================
+
+async function stakeholderInfo(id) {
+    const url = "/workSystem/stakeholder/data/" + id;
+    const response = await sendRequest(url);
+    return response;
+}
 
 async function stakeholderRegister(formData) {
     const url = "/workSystem/stakeholder/register"

@@ -12,3 +12,11 @@
     padding: .5rem;
     text-align: right;
 }
+
+.bl_data_item_box {
+    display: flex;
+}
+
+.hp_data_item_text_long {
+    flex-grow: 1 ;
+}

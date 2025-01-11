@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -16,6 +17,12 @@ public class StakeholderController {
 
     @Autowired
     StakeholderService stakeholderService;
+
+    @GetMapping("data/{wkId}")
+    public String getData(@PathVariable int wkId, Model model) {
+        model.addAttribute("stakeholderInfo" , stakeholderService.getByWfId(wkId));
+        return "stakeholderInfo :: stakeholderInfo";
+    }
 
     @PostMapping("/register")
     public ResponseEntity<StakeholderDTO> register(@ModelAttribute StakeholderDTO stakeholderDTO) {

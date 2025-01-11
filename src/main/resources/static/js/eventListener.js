@@ -72,13 +72,12 @@ async function handleChangeParent(e){
 
 // ============= logInfo event handler =========================
 
-async function handleLogInfo(e) {
-    const id = e.target.dataset.wkId;
+async function handleLogInfo(id) {
     const response = await logInfo(id);
-
+    const html = await response.text()
     console.log("handleLogInfo");
-    console.log("dataset wkId : " + id);
-    return response.text();
+    console.log("html : " + html);
+    document.getElementById("logInfo").innerHTML = html;
 }
 
 
@@ -112,6 +111,15 @@ async function handleLogModify(e) {
 }
 
 // ============= stakeholder event handler =========================
+
+
+async function handleStakeholderInfo(id) {
+    const response = await stakeholderInfo(id);
+    const html = await response.text()
+    console.log("handleStakeholderInfo");
+    console.log("html : " + html);
+    document.getElementById("stakeholderInfo").innerHTML = html;
+}
 
 async function handleStakeholderRegister(e) {
     const formdata = getEditFormData("shForm");
