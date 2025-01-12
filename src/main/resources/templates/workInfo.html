@@ -22,17 +22,39 @@
                         </a>
                     </span>
                 </div>
+                <div class="bl_data_item_subBox_edit hp_unVisible">
+                    <input class="bl_data_item_date_edit" name="wkDueDate" type="date" th:value="${#temporals.format(work.wkModDate, 'yyyy-MM-dd')}" data-wk-edit="wkEdit"></input>
+                    <span class="bl_data_item_file_edit" th:each="file : ${work.fileVO}">
+                        <span
+                                th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
+                        </span>
+                    </span>
+                    <input class="bl_data_item_file_edit" name="wfWkId" type="file" th:attr="data-wk-file-edit=${work.wkId}">
+                </div>
                 <div class="bl_data_item_box">
                     <span class="bl_data_item_date" th:text="${#temporals.format(work.wkRepDate, 'yyyy-MM-dd')}"></span>
                     <span class="bl_data_item_text" th:text="${work.wkTtl}"></span>
                     <span class="bl_data_item_text hp_data_item_text_long" th:text="${work.wkDsc}"></span>
                     <div class="bl_data_util_box">
-                        <button class="bl_data_util_button">편집</button>
-                        <button class="bl_data_util_button">삭제</button>
+                        <button id="wkEdit" class="bl_data_util_button">편집</button>
+                        <button id="wkRemove" class="bl_data_util_button">삭제</button>
+                    </div>
+                </div>
+                <div class="bl_data_item_box_edit hp_unVisible">
+                    <input class="hp_unVisible" type="hidden" name="wkId" th:value="${work.wkId}" data-wk-edit="wkEdit">
+                    <input class="bl_data_item_date_edit" name="wkRepDate" type="date" th:value="${#temporals.format(work.wkRepDate, 'yyyy-MM-dd')}" data-wk-edit="wkEdit">
+                    <input class="bl_data_item_text_edit" name="wkTtl" type="text" th:value="${work.wkTtl}" data-wk-edit="wkEdit">
+                    <input class="bl_data_item_text_edit hp_data_item_text_long" name="wkDsc" type="text" th:value="${work.wkDsc}" data-wk-edit="wkEdit">
+                    <div class="bl_data_util_box">
+                        <button id="wkEditSubmit" class="bl_data_util_button">완료</button>
+                        <button id="wkEditCancel" class="bl_data_util_button">취소</button>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
 </body>
+<script src="/js/addEventListener.js"></script>
+<script src="/js/eventListener.js"></script>
+<script src="/js/requests.js"></script>
 </html>

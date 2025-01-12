@@ -150,3 +150,7 @@
 .hp_data_item_text_long {
     flex-grow: 1 ;
 }
+
+.hp_unVisible {
+    display: none;
+}

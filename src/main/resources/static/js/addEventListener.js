@@ -1,20 +1,48 @@
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("HTML 문서가 로드되었습니다!");
     await handleWorkInfo(1);
+    await addEventListener_bl_data_work()
+});
 
+function addEventListener_bl_data_work() {
     const bl_data = document.querySelector(".bl_data");
     bl_data.addEventListener('click', async function (e) {
         console.log("click bl_data");
 
-        // 클릭한 요소에서 가장 가까운 li 태그를 찾음
-        const wkId = e.target.closest(".bl_data_item").dataset.wkId;
+        const bl_data_item_box = e.target.closest('.bl_data_item_box');
+        const bl_data_item_subBox = e.target.closest('.bl_data_item_subBox');
 
-        // li 태그가 존재하고, data-wkId 속성이 있을 경우
-        if (wkId) {
-            console.log(`wkId: ${wkId}`);
-            await handleLogInfo(wkId);
-            await handleStakeholderInfo(wkId);
+        if (bl_data_item_box) {
+            console.log("click bl_data_item_box")
+            await handleLogInfo(e);
+            await handleStakeholderInfo(e);
+        }
+
+        if (bl_data_item_subBox) {
+            console.log("click bl_data_item_box")
+            await handleLogInfo(e);
+            await handleStakeholderInfo(e);
+        }
+
+        if (e.target.id === "wkRemove") {
+            await handleWorkRemove(e);
+            await handleWorkInfo(1);
+            await addEventListener_bl_data_work();
+        }
+
+        if (e.target.id === "wkEdit") {
+            await handleVisible(e);
+        }
+
+        if (e.target.id === "wkEditSubmit") {
+            await handleWorkModify(e);
+            await handleWorkInfo(1);
+            await addEventListener_bl_data_work();
+        }
+
+
+        if (e.target.id === "wkEditCancel") {
+            await handleVisible(e);
         }
     })
-
-});
+}
