@@ -29,7 +29,7 @@
                                 th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
                         </span>
                     </span>
-                    <input class="bl_data_item_file_edit" name="wfWkId" type="file" th:attr="data-wk-file-edit=${work.wkId}">
+                    <input class="bl_data_item_file_edit" name="files" type="file" data-wk-file-edit=wkFileEdit th:attr="data-wf-wk-id=${work.wkId}, data-wf-lg-id=0" multiple>
                 </div>
                 <div class="bl_data_item_box">
                     <span class="bl_data_item_date" th:text="${#temporals.format(work.wkRepDate, 'yyyy-MM-dd')}"></span>
@@ -42,6 +42,14 @@
                 </div>
                 <div class="bl_data_item_box_edit hp_unVisible">
                     <input class="hp_unVisible" type="hidden" name="wkId" th:value="${work.wkId}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkRegDate" th:value="${work.wkRegDate}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkModDate" th:value="${work.wkModDate}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkUser" th:value="${work.wkUser}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkResUser" th:value="${work.wkResUser}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkTag" th:value="${work.wkTag}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkImp" th:value="${work.wkImp}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkParent" th:value="${work.wkParent}" data-wk-edit="wkEdit">
+                    <input class="hp_unVisible" type="hidden" name="wkRank" th:value="${work.wkRank}" data-wk-edit="wkEdit">
                     <input class="bl_data_item_date_edit" name="wkRepDate" type="date" th:value="${#temporals.format(work.wkRepDate, 'yyyy-MM-dd')}" data-wk-edit="wkEdit">
                     <input class="bl_data_item_text_edit" name="wkTtl" type="text" th:value="${work.wkTtl}" data-wk-edit="wkEdit">
                     <input class="bl_data_item_text_edit hp_data_item_text_long" name="wkDsc" type="text" th:value="${work.wkDsc}" data-wk-edit="wkEdit">

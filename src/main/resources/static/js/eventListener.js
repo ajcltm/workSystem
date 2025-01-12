@@ -64,11 +64,17 @@ async function handleWorkModify(e) {
 
     console.log("formdata : " + formdata);
     console.log(response.text());
+}
+
+async function handleFileUpLoad(e) {
+
+    const closestBlDataItem = e.target.closest('.bl_data_item');
+    console.log("handleFileUpLoad");
 
     const inputs_file = closestBlDataItem.querySelectorAll(`input[data-wk-file-edit]`);
     console.log("inputs_file"+inputs_file)
     const formdata_file = getEditFileFormData(inputs_file);
-    if ((formdata_file.keys.length === 0)) {
+    if (([...formdata_file.keys()].length === 0)) {
         return ;
     }
     const response_file = await fileUpload(formdata_file);
@@ -231,8 +237,8 @@ function getEditFileFormData(inputs) {
     // 선택된 input 요소 순회
     inputs.forEach(input => {
         // data 속성의 값이 키가 되고 input의 값이 FormData에 추가됨
-        const key = input.name ;
-        const foreign_id = input.dataset.wkFileEdit;
+        const wfWkId = input.dataset.wfWkId;
+        const wfLgId = input.dataset.wfLgId;
         if (input.files.length === 0) {
             return ;
         }
@@ -240,7 +246,8 @@ function getEditFileFormData(inputs) {
         Array.from(input.files).forEach(file => {
             formData.append("files", file); // 'files' 키로 파일 추가
         });
-        formData.append(key, foreign_id);
+        formData.append("wfWkId", wfWkId);
+        formData.append("wfLgId", wfLgId);
     });
     return formData;
 }

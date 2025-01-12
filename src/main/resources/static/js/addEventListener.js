@@ -36,6 +36,7 @@ function addEventListener_bl_data_work() {
 
         if (e.target.id === "wkEditSubmit") {
             await handleWorkModify(e);
+            await handleFileUpLoad(e);
             await handleWorkInfo(1);
             await addEventListener_bl_data_work();
         }
