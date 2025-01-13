@@ -18,6 +18,7 @@ public class LogInfoController {
 
     @GetMapping("data/{wkId}")
     public String getData(@PathVariable int wkId, Model model) {
+        model.addAttribute("wkId", wkId);
         model.addAttribute("logInfo" , service.getAll(wkId));
         return "logInfo :: logInfo";
     }

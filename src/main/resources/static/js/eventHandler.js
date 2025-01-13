@@ -9,13 +9,17 @@ async function handleWorkInfo(id) {
     const response = await workInfo(id);
     const html = await response.text()
     console.log("handleWorkInfo");
-    console.log("html : " + html);
     document.getElementById("workInfo").innerHTML = html;
 }
 
 // ============= work event handler =========================
 async function handleWorkRegister(e) {
-    const formdata = getEditFormData("wkForm");
+    const closestBlDataItem = e.target.closest('.bl_data_item_box_edit');
+
+    // 특정 data-속성을 가진 모든 input 요소 선택
+    const inputs = closestBlDataItem.querySelectorAll(`input[data-wk-edit]`);
+    console.log(inputs)
+    const formdata = getEditFormData(inputs);
     const response = await workRegister(formdata);
 
     console.log("handleWorkRegister");
@@ -43,10 +47,14 @@ function handleVisible(e) {
         const box = closestBlDataItem.querySelector('.bl_data_item_box');
 
         // hp_unVisible 클래스 토글
-        subBoxEdit.classList.toggle('hp_unVisible');
+        if(subBoxEdit){
+            subBoxEdit.classList.toggle('hp_unVisible');
+        }
         boxEdit.classList.toggle('hp_unVisible');
 
-        subBox.classList.toggle('hp_unVisible');
+        if(subBox) {
+            subBox.classList.toggle('hp_unVisible');
+        }
         box.classList.toggle('hp_unVisible');
     }
 }
@@ -66,7 +74,7 @@ async function handleWorkModify(e) {
     console.log(response.text());
 }
 
-async function handleFileUpLoad(e) {
+async function handleWorkFileUpLoad(e) {
 
     const closestBlDataItem = e.target.closest('.bl_data_item');
     console.log("handleFileUpLoad");
@@ -115,12 +123,12 @@ async function handleChangeParent(e){
 // ============= logInfo event handler =========================
 
 async function handleLogInfo(e) {
-    const wkId = e.target.closest(".bl_data_item").dataset.wkId;
+    // const wkId = e.target.closest(".bl_data_item").dataset.wkId;
+
     console.log(`wkId: ${wkId}`);
     const response = await logInfo(wkId);
     const html = await response.text()
     console.log("handleLogInfo");
-    console.log("html : " + html);
     document.getElementById("logInfo").innerHTML = html;
 }
 
@@ -128,7 +136,13 @@ async function handleLogInfo(e) {
 // ============= log event handler =========================
 
 async function handleLogRegister(e) {
-    const formdata = getEditFormData("lgForm");
+    const closestBlDataItem = e.target.closest('.bl_data_item_box_edit');
+
+    // 특정 data-속성을 가진 모든 input 요소 선택
+    const inputs = closestBlDataItem.querySelectorAll(`input[data-lg-edit]`);
+    console.log(inputs)
+
+    const formdata = getEditFormData(inputs);
     const response = await logRegister(formdata);
 
     console.log("handleLogRegister");
@@ -137,7 +151,7 @@ async function handleLogRegister(e) {
 }
 
 async function handleLogRemove(e) {
-    const id = e.target.dataset.lgId
+    const id = e.target.closest(".bl_data_item").dataset.lgId;
     const response = await logRemove(id);
 
     console.log("handleLogRemove");
@@ -146,7 +160,13 @@ async function handleLogRemove(e) {
 }
 
 async function handleLogModify(e) {
-    const formdata = getEditFormData("lgForm");
+    const closestBlDataItem = e.target.closest('.bl_data_item');
+    console.log("handleWorkModify");
+
+    // 특정 data-속성을 가진 모든 input 요소 선택
+    const inputs = closestBlDataItem.querySelectorAll(`input[data-lg-edit]`);
+    console.log(inputs)
+    const formdata = getEditFormData(inputs);
     const response = await logModify(formdata);
 
     console.log("handleLogModify");
@@ -154,21 +174,43 @@ async function handleLogModify(e) {
     console.log(response.text());
 }
 
+
+async function handleLogFileUpLoad(e) {
+
+    const closestBlDataItem = e.target.closest('.bl_data_item');
+    console.log("handleLogFileUpLoad");
+
+    const inputs_file = closestBlDataItem.querySelectorAll(`input[data-lg-file-edit]`);
+    console.log("inputs_file"+inputs_file)
+    const formdata_file = getEditFileFormData(inputs_file);
+    if (([...formdata_file.keys()].length === 0)) {
+        return ;
+    }
+    const response_file = await fileUpload(formdata_file);
+
+    console.log("formdata : " + formdata_file);
+    console.log(response_file.text());
+}
+
 // ============= stakeholder event handler =========================
 
 
 async function handleStakeholderInfo(e) {
-    const wkId = e.target.closest(".bl_data_item").dataset.wkId;
+    // const wkId = e.target.closest(".bl_data_item").dataset.shId;
     console.log(`wkId: ${wkId}`);
     const response = await stakeholderInfo(wkId);
     const html = await response.text()
     console.log("handleStakeholderInfo");
-    console.log("html : " + html);
     document.getElementById("stakeholderInfo").innerHTML = html;
 }
 
 async function handleStakeholderRegister(e) {
-    const formdata = getEditFormData("shForm");
+    const closestBlDataItem = e.target.closest('.bl_data_item_box_edit');
+
+    // 특정 data-속성을 가진 모든 input 요소 선택
+    const inputs = closestBlDataItem.querySelectorAll(`input[data-sh-edit]`);
+    console.log(inputs)
+    const formdata = getEditFormData(inputs);
     const response = await stakeholderRegister(formdata);
 
     console.log("handleStakeholderRegister");
@@ -177,7 +219,7 @@ async function handleStakeholderRegister(e) {
 }
 
 async function handleStakeholderRemove(e) {
-    const id = e.target.dataset.shId
+    const id = e.target.closest(".bl_data_item").dataset.shId;
     const response = await stakeholderRemove(id);
 
     console.log("handleStakeholderRemove");
@@ -186,7 +228,14 @@ async function handleStakeholderRemove(e) {
 }
 
 async function handleStakeholderModify(e) {
-    const formdata = getEditFormData("shForm");
+
+    const closestBlDataItem = e.target.closest('.bl_data_item');
+    console.log("handleShModify");
+
+    // 특정 data-속성을 가진 모든 input 요소 선택
+    const inputs = closestBlDataItem.querySelectorAll(`input[data-sh-edit]`);
+    console.log(inputs)
+    const formdata = getEditFormData(inputs);
     const response = await stakeholderModify(formdata);
 
     console.log("handleStakeholderModify");

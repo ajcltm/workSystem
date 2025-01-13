@@ -118,6 +118,6 @@
                  LEFT JOIN tbl_file f ON w.wkId = f.wfWkId
                  LEFT JOIN tbl_stakeholder s ON w.wkId = s.shWkId
         WHERE w.wkUser = #{mbId}
-        ORDER BY wh.Path, wh.Level;
+        ORDER BY wh.wkRank, wh.Level;
     </select>
 </mapper>

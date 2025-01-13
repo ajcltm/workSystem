@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="bl_data" th:fragment="workInfo">
+    <div class="bl_wk_data" th:fragment="workInfo">
         <div class="bl_data_util_box">
             <button class="bl_data_util_button">변경</button>
             <button class="bl_data_util_button">올리기</button>
@@ -59,10 +59,19 @@
                     </div>
                 </div>
             </li>
+            <div class="bl_data_item_box_edit">
+                <input class="hp_unVisible" type="hidden" name="wkUser" th:value="1" data-wk-edit="wkEdit">
+                <input class="bl_data_item_date_edit" name="wkRepDate" type="date" data-wk-edit="wkEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                <input class="bl_data_item_text_edit" name="wkTtl" type="text" data-wk-edit="wkEdit">
+                <input class="bl_data_item_text_edit hp_data_item_text_long" name="wkDsc" type="text" data-wk-edit="wkEdit">
+                <div class="bl_data_util_box">
+                    <button id="wkRegister" class="bl_data_util_button">등록</button>
+                </div>
+            </div>
         </ul>
     </div>
 </body>
 <script src="/js/addEventListener.js"></script>
-<script src="/js/eventListener.js"></script>
+<script src="/js/eventHandler.js"></script>
 <script src="/js/requests.js"></script>
 </html>

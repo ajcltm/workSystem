@@ -78,14 +78,14 @@ public class StakeholderServiceTest {
     public void selectByIdTest () {
         service.register(createDTO());
 //      id 속성 이름 확인 필요
-        Assertions.assertEquals(service.getLast().getShId(), service.getByWfId(service.getLast().getShId()).getShId());
+        Assertions.assertEquals(service.getLast().getShId(), service.getByShId(service.getLast().getShId()).getShId());
     }
 
     @Test
     public void selectByParentIdTest () {
         service.register(createDTO());
 //      Foriegn Id 확인 필요
-        Assertions.assertEquals(service.getLast().getShWkId(), service.getByWfWkId(service.getLast().getShWkId()).get(0).getShWkId());
+        Assertions.assertEquals(service.getLast().getShWkId(), service.getByWkId(service.getLast().getShWkId()).get(0).getShWkId());
     }
 
     @Test

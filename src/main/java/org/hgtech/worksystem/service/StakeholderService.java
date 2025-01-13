@@ -36,11 +36,11 @@ public class StakeholderService {
         return repository.selectAll().stream().map(vo -> mapper.map(vo, StakeholderDTO.class)).collect(Collectors.toList());
     }
 
-    public StakeholderDTO getByWfId(int id) {
+    public StakeholderDTO getByShId(int id) {
         return mapper.map(repository.selectByShId(id), StakeholderDTO.class);
     }
 
-    public List<StakeholderDTO> getByWfWkId(int id) {
+    public List<StakeholderDTO> getByWkId(int id) {
         return repository.selectByShWkId(id).stream().map(vo -> mapper.map(vo, StakeholderDTO.class)).collect(Collectors.toList());
     }
 

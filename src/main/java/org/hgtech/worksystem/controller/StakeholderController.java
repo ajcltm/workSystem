@@ -20,7 +20,8 @@ public class StakeholderController {
 
     @GetMapping("data/{wkId}")
     public String getData(@PathVariable int wkId, Model model) {
-        model.addAttribute("stakeholderInfo" , stakeholderService.getByWfId(wkId));
+        model.addAttribute("wkId", wkId);
+        model.addAttribute("stakeholderInfo" , stakeholderService.getByWkId(wkId));
         return "stakeholderInfo :: stakeholderInfo";
     }
 
