@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Title</title>
 </head>
 <body>
@@ -48,15 +49,15 @@
                 </div>
             </div>
         </li>
-        <div class="bl_data_item_box_edit">
-            <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${wkId}" data-lg-edit="lgEdit">
-            <input class="bl_data_item_date_edit" name="lgRepDate" type="date" data-lg-edit="lgEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-            <input class="bl_data_item_text_edit hp_data_item_text_long " name="lgDsc" type="text" data-lg-edit="lgEdit">
-            <input class="bl_data_item_text_edit " name="lgTag" type="text" data-lg-edit="lgEdit">
-            <div class="bl_data_util_box">
-                <button id="lgRegister" class="bl_data_util_button">등록</button>
+            <div class="bl_data_item_box_edit">
+                <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${wkId}" data-lg-edit="lgEdit">
+                <input class="bl_data_item_date_edit" name="lgRepDate" type="date" data-lg-edit="lgEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                <input class="bl_data_item_text_edit bl_data_item_text_long " name="lgDsc" type="text" data-lg-edit="lgEdit">
+                <input class="bl_data_item_text_edit " name="lgTag" type="text" data-lg-edit="lgEdit">
+                <div class="bl_data_util_box">
+                    <button id="lgRegister" class="bl_data_util_button">등록</button>
+                </div>
             </div>
-        </div>
     </ul>
 </div>
 </body>

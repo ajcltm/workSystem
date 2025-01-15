@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/style.css">
+    <link href="/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="/fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="/fontawesome/css/solid.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
-    <header class="ly_header">
+    <header class="ly_header hp_primary_bg hp_shadow">
         <div class="ly_header_inner">
-            <div class="el_header_logo">Logo</div>
+            <div class="el_header_logo"><a href="http://localhost:8080/workSystem/workspace">Work Space</a></div>
             <div class="md_header_util_wrapper">
                 Util
             </div>
         </div>
-        <div class="ly_main">
-            <div class="ly_main_inner">
-                <div class="ly_main_inner_col1">
-                    <div class="ly_main_inner_col1_row1">
-                        <span>ly_main_inner_col1_row1</span>
-                    </div>
-                    <div class="ly_main_inner_col1_row2" id="workInfo">
-                    </div>
+    </header>
+    <div class="ly_main">
+        <div class="ly_main_inner">
+            <div class="ly_main_inner_col1">
+                <div class="ly_main_inner_col1_row1">
+                    <span class="el_heading_lv1">업무 목록</span>
                 </div>
-                <div class="ly_main_inner_col2">
-                    <div class="ly_main_inner_col2_row1">ly_main_inner_col1_row1</div>
-                    <div class="ly_main_inner_col2_row2">ly_main_inner_col1_row2</div>
-                    <div class="ly_main_inner_col2_row3" id="logInfo">ly_main_inner_col1_row3</div>
-                    <div class="ly_main_inner_col2_row4" id="stakeholderInfo">ly_main_inner_col1_row4</div>
+                <div class="ly_main_inner_col1_row2" id="workInfo">
                 </div>
             </div>
+            <div class="ly_main_inner_col2">
+                <div class="ly_main_inner_col2_row1"><span class="el_heading_lv1">상세 내용</span></div>
+                <div class="ly_main_inner_col2_row2"><span class="el_heading_lv2">업무 내용</span></div>
+                <div class="ly_main_inner_col2_row3" id="logInfo"><span class="el_heading_lv2">로그 목록</span></div>
+                <div class="ly_main_inner_col2_row4" id="stakeholderInfo"><span class="el_heading_lv2">연락처</span></div>
+            </div>
         </div>
-        <div class="ly_footer">
-            footer
-        </div>
-    </header>
+    </div>
+    <div class="ly_footer">
+        footer
+    </div>
 </body>
 <script src="/js/main.js"></script>
 <script src="/js/addEventListener.js"></script>
