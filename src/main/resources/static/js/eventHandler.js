@@ -10,6 +10,7 @@ async function handleWorkInfo(id) {
     const html = await response.text()
     console.log("handleWorkInfo");
     document.getElementById("workInfo").innerHTML = html;
+    arrangeDisplay();
 }
 
 // ============= work event handler =========================
@@ -92,27 +93,25 @@ async function handleWorkFileUpLoad(e) {
 }
 
 async function handleWorkRankUp(e) {
-    const id = e.target.dataset.wkId
-    const response = await workRankUp(id);
+    const response = await workRankUp(wkId);
 
     console.log("handleWorkRankUp");
-    console.log("dataset wkId : " + id);
+    console.log("dataset wkId : " + wkId);
     console.log(response.text());
 }
 
 async function handleWorkRankDown(e) {
-    const id = e.target.dataset.wkId
-    const response = await workRankDown(id);
+    const response = await workRankDown(wkId);
 
     console.log("handleWorkRankDown");
-    console.log("dataset wkId : " + id);
+    console.log("dataset wkId : " + wkId);
     console.log(response.text());
 }
 
 async function handleChangeParent(e){
-    const parentId = document.querySelector(`[data-changeParent]`).dataset.wkId;
-    const currentId = document.querySelector(`[data-changeWkId]`).dataset.wkId;
-    const response = await workChangeParent(parentEl, currentEl);
+    const parentId = e.target.closest(".bl_data_item").dataset.wkRank;
+    const currentId = wkId;
+    const response = await workChangeParent(parentId, currentId);
 
     console.log("handleChangeParent");
     console.log("dataset changeParent : " + parentId);

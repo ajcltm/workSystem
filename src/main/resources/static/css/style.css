@@ -98,6 +98,14 @@
     margin-block-start: .5rem;
 }
 
+.bl_wk_data > .bl_data_util_box {
+    height: 2rem;
+}
+
+.bl_data_item .bl_data_util_box {
+    flex: 0 0 8rem;
+}
+
 .bl_data_util_box {
     padding: .25rem;
     text-align: right;

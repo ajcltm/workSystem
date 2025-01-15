@@ -52,6 +52,27 @@ function addEventListener_bl_data_work() {
             await handleWorkInfo(1);
             await addEventListener_bl_data_work();
         }
+
+        if(e.target.id === "wkRankUp") {
+            await handleWorkRankUp(e);
+            await handleWorkInfo(1);
+            await selectWkId(e);
+            await addEventListener_bl_data_work();
+        }
+
+        if(e.target.id === "wkRankDown") {
+            await handleWorkRankDown(e);
+            await handleWorkInfo(1);
+            await selectWkId(e);
+            await addEventListener_bl_data_work();
+        }
+
+        if(e.target.id==="wkParent") {
+            await handleChangeParent(e);
+            await handleWorkInfo(1);
+            await selectWkId(e);
+            await addEventListener_bl_data_work();
+        }
     })
 }
 

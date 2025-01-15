@@ -31,6 +31,6 @@
         FROM tbl_log
         LEFT JOIN tbl_file ON lgId = wfLgId
         WHERE lgWkId = #{wkId}
-        ORDER BY lgId;
+        ORDER BY lgRepDate;
     </select>
 </mapper>

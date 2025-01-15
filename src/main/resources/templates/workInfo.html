@@ -8,12 +8,11 @@
 <body>
     <div class="bl_wk_data" th:fragment="workInfo">
         <div class="bl_data_util_box">
-            <button class="bl_data_util_button">변경</button>
-            <button class="bl_data_util_button">올리기</button>
-            <button class="bl_data_util_button">내리기</button>
+            <button id="wkRankUp" class="bl_data_util_button hp_unVisible">올리기</button>
+            <button id="wkRankDown" class="bl_data_util_button hp_unVisible">내리기</button>
         </div>
         <ul class="bl_data_body">
-            <li class="bl_data_item" th:each="work : ${workInfo}" th:attr="data-wk-id=${work.wkId}">
+            <li class="bl_data_item" th:each="work : ${workInfo}" th:attr="data-wk-id=${work.wkId}, data-wk-rank=${work.wkRank}">
                 <div class="bl_data_item_subBox">
                     <span class="bl_data_item_date" th:text="${#temporals.format(work.wkModDate, 'yyyy-MM-dd')}"></span>
                     <span class="bl_data_item_file" th:each="file : ${work.fileVO}">
@@ -36,8 +35,10 @@
                     <span class="bl_data_item_text" th:text="${work.wkTtl}"></span>
                     <span class="bl_data_item_text hp_data_item_text_long" th:text="${work.wkDsc}"></span>
                     <div class="bl_data_util_box">
-                        <button id="wkEdit" class="bl_data_util_button">편집</button>
-                        <button id="wkRemove" class="bl_data_util_button">삭제</button>
+                        <button id="wkEdit" class="bl_data_util_button hp_unVisible">편집</button>
+                        <button id="wkRemove" class="bl_data_util_button hp_unVisible">삭제</button>
+                        <button id="wkRegisterChild" class="bl_data_util_button hp_unVisible">추가</button>
+                        <button id="wkParent" class="bl_data_util_button hp_unVisible">넣기</button>
                     </div>
                 </div>
                 <div class="bl_data_item_box_edit hp_unVisible">

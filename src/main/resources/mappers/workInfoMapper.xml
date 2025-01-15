@@ -53,7 +53,7 @@
                 wkId,
                 wkRank,
                 wkParent,
-                CAST(wkRank AS CHAR(255)) AS Path,
+                CAST(LPAD(wkRank, 5, '0') AS CHAR(255)) AS Path,
                 0 AS Level
             FROM tbl_work
             WHERE wkParent IS NULL
@@ -64,7 +64,7 @@
                 w.wkId,
                 w.wkRank,
                 w.wkParent,
-                CONCAT(wh.Path, ' > ', CAST(w.wkRank AS CHAR(255))) AS Path,
+                CONCAT(wh.Path, ' > ', CAST(LPAD(W.wkRank, 5, '0') AS CHAR(255))) AS Path,
                 wh.Level + 1 AS Level
             FROM tbl_work w
                      INNER JOIN WorkHierarchy wh ON w.wkParent = wh.wkRank
@@ -118,6 +118,6 @@
                  LEFT JOIN tbl_file f ON w.wkId = f.wfWkId
                  LEFT JOIN tbl_stakeholder s ON w.wkId = s.shWkId
         WHERE w.wkUser = #{mbId}
-        ORDER BY wh.wkRank, wh.Level;
+        ORDER BY wh.Path;
     </select>
 </mapper>
