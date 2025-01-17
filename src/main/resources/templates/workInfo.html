@@ -12,7 +12,7 @@
             <button id="wkRankDown" class="bl_data_util_button hp_unVisible">내리기</button>
         </div>
         <ul class="bl_data_body">
-            <li class="bl_data_item" th:each="work : ${workInfo}" th:attr="data-wk-id=${work.wkId}, data-wk-rank=${work.wkRank}">
+            <li class="bl_data_item" th:each="work : ${workInfo}" th:attr="data-wk-id=${work.wkId}, data-wk-rank=${work.wkRank}, data-wk-level=${work.wkLevel}">
                 <div class="bl_data_item_subBox">
                     <span class="bl_data_item_date" th:text="${#temporals.format(work.wkModDate, 'yyyy-MM-dd')}"></span>
                     <span class="bl_data_item_file" th:each="file : ${work.fileVO}">
@@ -64,7 +64,7 @@
                 <input class="hp_unVisible" type="hidden" name="wkUser" th:value="1" data-wk-edit="wkEdit">
                 <input class="bl_data_item_date_edit" name="wkRepDate" type="date" data-wk-edit="wkEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                 <input class="bl_data_item_text_edit" name="wkTtl" type="text" data-wk-edit="wkEdit">
-                <input class="bl_data_item_text_edit hp_data_item_text_long" name="wkDsc" type="text" data-wk-edit="wkEdit">
+                <input class="bl_data_item_text_edit bl_data_item_text_long" name="wkDsc" type="text" data-wk-edit="wkEdit">
                 <div class="bl_data_util_box">
                     <button id="wkRegister" class="bl_data_util_button">등록</button>
                 </div>

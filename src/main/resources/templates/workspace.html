@@ -17,7 +17,7 @@
         <div class="ly_header_inner">
             <div class="el_header_logo"><a href="http://localhost:8080/workSystem/workspace">Work Space</a></div>
             <div class="md_header_util_wrapper">
-                Util
+
             </div>
         </div>
     </header>
@@ -25,16 +25,21 @@
         <div class="ly_main_inner">
             <div class="ly_main_inner_col1">
                 <div class="ly_main_inner_col1_row1">
-                    <span class="el_heading_lv1">업무 목록</span>
+                    <p class="el_heading_lv1">업무 목록</p>
                 </div>
-                <div class="ly_main_inner_col1_row2" id="workInfo">
-                </div>
+                <div class="ly_main_inner_col1_row2" id="workInfo"></div>
             </div>
             <div class="ly_main_inner_col2">
-                <div class="ly_main_inner_col2_row1"><span class="el_heading_lv1">상세 내용</span></div>
-                <div class="ly_main_inner_col2_row2"><span class="el_heading_lv2">업무 내용</span></div>
-                <div class="ly_main_inner_col2_row3" id="logInfo"><span class="el_heading_lv2">로그 목록</span></div>
-                <div class="ly_main_inner_col2_row4" id="stakeholderInfo"><span class="el_heading_lv2">연락처</span></div>
+                <div class="ly_main_inner_col2_row1"><p class="el_heading_lv1">상세 내용</p></div>
+<!--                <div class="ly_main_inner_col2_row2"><p class="el_heading_lv2">업무 내용</p></div>-->
+                <div class="ly_main_inner_col2_row3">
+                    <p class="el_heading_lv2">로그 목록</p>
+                    <div id="logInfo" class="bl_lg_data"></div>
+                </div>
+                <div class="ly_main_inner_col2_row4" >
+                    <p class="el_heading_lv2">연락처</p>
+                    <div id="stakeholderInfo" class="bl_sh_data"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -47,4 +52,5 @@
 <script src="/js/eventHandler.js"></script>
 <script src="/js/requests.js"></script>
 <script src="/js/workSelect.js"></script>
+<script src="/js/levelize.js"></script>
 </html>

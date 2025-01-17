@@ -6,59 +6,57 @@
     <title>Title</title>
 </head>
 <body>
-<div class="bl_lg_data" th:fragment="logInfo">
-    <ul class="bl_data_body">
-        <li class="bl_data_item" th:each="log : ${logInfo}" th:attr="data-lg-id=${log.lgId}">
-            <div class="bl_data_item_subBox">
-                <span class="bl_data_item_date" th:text="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}"></span>
-                <span class="bl_data_item_file" th:each="file : ${log.fileVO}">
+<ul class="bl_data_body" th:fragment="logInfo">
+    <li class="bl_data_item" th:each="log : ${logInfo}" th:attr="data-lg-id=${log.lgId}">
+        <div class="bl_data_item_subBox">
+            <span class="bl_data_item_date" th:text="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}"></span>
+            <span class="bl_data_item_file" th:each="file : ${log.fileVO}">
                         <a th:href="'http://localhost:8080/workSystem/files/download?wfId=' + ${file.wfId}"
                            th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
                         </a>
                     </span>
-            </div>
-            <div class="bl_data_item_subBox_edit hp_unVisible">
-                <input class="bl_data_item_date_edit" name="lgDueDate" type="date" th:value="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}" data-lg-edit="lgEdit"></input>
-                <span class="bl_data_item_file_edit" th:each="file : ${log.fileVO}">
+        </div>
+        <div class="bl_data_item_subBox_edit hp_unVisible">
+            <input class="bl_data_item_date_edit" name="lgDueDate" type="date" th:value="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}" data-lg-edit="lgEdit"></input>
+            <span class="bl_data_item_file_edit" th:each="file : ${log.fileVO}">
                         <span
                                 th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
                         </span>
                     </span>
-                <input class="bl_data_item_file_edit" name="files" type="file" data-lg-file-edit=lgFileEdit th:attr="data-wf-lg-id=${log.lgId}, data-wf-wk-id=0" multiple>
+            <input class="bl_data_item_file_edit" name="files" type="file" data-lg-file-edit=lgFileEdit th:attr="data-wf-lg-id=${log.lgId}, data-wf-wk-id=0" multiple>
+        </div>
+        <div class="bl_data_item_box">
+            <span class="bl_data_item_date" th:text="${#temporals.format(log.lgRepDate, 'yyyy-MM-dd')}"></span>
+            <span class="bl_data_item_text hp_data_item_text_long" th:text="${log.lgDsc}"></span>
+            <span class="bl_data_item_text" th:text="${log.lgTag}"></span>
+            <div class="bl_data_util_box">
+                <button id="lgEdit" class="bl_data_util_button">편집</button>
+                <button id="lgRemove" class="bl_data_util_button">삭제</button>
             </div>
-            <div class="bl_data_item_box">
-                <span class="bl_data_item_date" th:text="${#temporals.format(log.lgRepDate, 'yyyy-MM-dd')}"></span>
-                <span class="bl_data_item_text hp_data_item_text_long" th:text="${log.lgDsc}"></span>
-                <span class="bl_data_item_text" th:text="${log.lgTag}"></span>
-                <div class="bl_data_util_box">
-                    <button id="lgEdit" class="bl_data_util_button">편집</button>
-                    <button id="lgRemove" class="bl_data_util_button">삭제</button>
-                </div>
+        </div>
+        <div class="bl_data_item_box_edit hp_unVisible">
+            <input class="hp_unVisible" type="hidden" name="lgId" th:value="${log.lgId}" data-lg-edit="lgEdit">
+            <input class="hp_unVisible" type="hidden" name="lgRegDate" th:value="${log.lgRegDate}" data-lg-edit="lgEdit">
+            <input class="hp_unVisible" type="hidden" name="lgModDate" th:value="${log.lgModDate}" data-lg-edit="lgEdit">
+            <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${log.lgWkId}" data-lg-edit="lgEdit">
+            <input class="bl_data_item_date_edit" name="lgRepDate" type="date" th:value="${#temporals.format(log.lgRepDate, 'yyyy-MM-dd')}" data-lg-edit="lgEdit">
+            <input class="bl_data_item_text_edit hp_data_item_text_long" name="lgDsc" type="text" th:value="${log.lgDsc}" data-lg-edit="lgEdit">
+            <input class="bl_data_item_text_edit" type="text" name="lgTag" th:value="${log.lgTag}" data-lg-edit="lgEdit">
+            <div class="bl_data_util_box">
+                <button id="lgEditSubmit" class="bl_data_util_button">완료</button>
+                <button id="lgEditCancel" class="bl_data_util_button">취소</button>
             </div>
-            <div class="bl_data_item_box_edit hp_unVisible">
-                <input class="hp_unVisible" type="hidden" name="lgId" th:value="${log.lgId}" data-lg-edit="lgEdit">
-                <input class="hp_unVisible" type="hidden" name="lgRegDate" th:value="${log.lgRegDate}" data-lg-edit="lgEdit">
-                <input class="hp_unVisible" type="hidden" name="lgModDate" th:value="${log.lgModDate}" data-lg-edit="lgEdit">
-                <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${log.lgWkId}" data-lg-edit="lgEdit">
-                <input class="bl_data_item_date_edit" name="lgRepDate" type="date" th:value="${#temporals.format(log.lgRepDate, 'yyyy-MM-dd')}" data-lg-edit="lgEdit">
-                <input class="bl_data_item_text_edit hp_data_item_text_long" name="lgDsc" type="text" th:value="${log.lgDsc}" data-lg-edit="lgEdit">
-                <input class="bl_data_item_text_edit" type="text" name="lgTag" th:value="${log.lgTag}" data-lg-edit="lgEdit">
-                <div class="bl_data_util_box">
-                    <button id="lgEditSubmit" class="bl_data_util_button">완료</button>
-                    <button id="lgEditCancel" class="bl_data_util_button">취소</button>
-                </div>
-            </div>
-        </li>
-            <div class="bl_data_item_box_edit">
-                <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${wkId}" data-lg-edit="lgEdit">
-                <input class="bl_data_item_date_edit" name="lgRepDate" type="date" data-lg-edit="lgEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                <input class="bl_data_item_text_edit bl_data_item_text_long " name="lgDsc" type="text" data-lg-edit="lgEdit">
-                <input class="bl_data_item_text_edit " name="lgTag" type="text" data-lg-edit="lgEdit">
-                <div class="bl_data_util_box">
-                    <button id="lgRegister" class="bl_data_util_button">등록</button>
-                </div>
-            </div>
-    </ul>
-</div>
+        </div>
+    </li>
+    <div class="bl_data_item_box_edit">
+        <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${wkId}" data-lg-edit="lgEdit">
+        <input class="bl_data_item_date_edit" name="lgRepDate" type="date" data-lg-edit="lgEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+        <input class="bl_data_item_text_edit bl_data_item_text_long " name="lgDsc" type="text" data-lg-edit="lgEdit">
+        <input class="bl_data_item_text_edit " name="lgTag" type="text" data-lg-edit="lgEdit">
+        <div class="bl_data_util_box">
+            <button id="lgRegister" class="bl_data_util_button">등록</button>
+        </div>
+    </div>
+</ul>
 </body>
 </html>

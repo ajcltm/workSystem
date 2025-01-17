@@ -11,6 +11,7 @@ async function handleWorkInfo(id) {
     console.log("handleWorkInfo");
     document.getElementById("workInfo").innerHTML = html;
     arrangeDisplay();
+    levelize();
 }
 
 // ============= work event handler =========================
