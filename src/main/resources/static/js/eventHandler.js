@@ -182,7 +182,7 @@ async function handleLogInfo(e) {
     const response = await logInfo(wkId);
     const html = await response.text()
     console.log("handleLogInfo");
-    document.getElementById("logInfo").innerHTML = html;
+    document.getElementById("bl_lg_data").innerHTML = html;
     await addEventListener_bl_data_log();
 }
 
@@ -255,7 +255,7 @@ async function handleStakeholderInfo(e) {
     const response = await stakeholderInfo(wkId);
     const html = await response.text()
     console.log("handleStakeholderInfo");
-    document.getElementById("stakeholderInfo").innerHTML = html;
+    document.getElementById("bl_sh_data").innerHTML = html;
     addEventListener_bl_data_stakeholder();
 }
 

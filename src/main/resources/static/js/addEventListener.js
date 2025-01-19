@@ -1,6 +1,6 @@
 
 function addEventListener_bl_data_work() {
-    const bl_data = document.querySelector(".bl_wk_data");
+    const bl_data = document.querySelector("#bl_wk_data");
 
     bl_data.removeEventListener('click', handle_bl_data_work_Click);
 
@@ -100,7 +100,7 @@ async function handle_bl_data_work_Click(e) {
 }
 
 function addEventListener_bl_data_log() {
-    const bl_data = document.querySelector(".bl_lg_data");
+    const bl_data = document.querySelector("#bl_lg_data");
 
     bl_data.removeEventListener('click', handle_bl_data_log_Click);
 
@@ -136,7 +136,7 @@ async function handle_bl_data_log_Click(e) {
     }
 }
 function addEventListener_bl_data_stakeholder() {
-    const bl_data = document.querySelector(".bl_sh_data");
+    const bl_data = document.querySelector("#bl_sh_data");
 
     bl_data.removeEventListener('click', handle_bl_data_stakeholder_Click);
 

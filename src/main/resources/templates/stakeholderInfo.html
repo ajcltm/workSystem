@@ -5,15 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<ul class="bl_data_body" th:fragment="stakeholderInfo">
+<ul class="bl_data_body hp_height_short" th:fragment="stakeholderInfo">
     <li class="bl_data_item" th:each="stakeholder : ${stakeholderInfo}" th:attr="data-sh-id=${stakeholder.shId}">
         <div class="bl_data_item_box">
-            <span class="bl_data_item_text" th:text="${stakeholder.shName}"></span>
-            <span class="bl_data_item_text" th:text="${stakeholder.shCompany}"></span>
-            <span class="bl_data_item_text" th:text="${stakeholder.shMobile}"></span>
-            <span class="bl_data_item_text" th:text="${stakeholder.shPhone}"></span>
-            <span class="bl_data_item_text" th:text="${stakeholder.shEmail}"></span>
-            <span class="bl_data_item_text" th:text="${stakeholder.shAddress}"></span>
+            <span class="bl_data_item_content" th:text="${stakeholder.shName}"></span>
+            <span class="bl_data_item_content" th:text="${stakeholder.shCompany}"></span>
+            <span class="bl_data_item_content" th:text="${stakeholder.shMobile}"></span>
+            <span class="bl_data_item_content" th:text="${stakeholder.shPhone}"></span>
+            <span class="bl_data_item_content" th:text="${stakeholder.shEmail}"></span>
+            <span class="bl_data_item_content" th:text="${stakeholder.shAddress}"></span>
             <div class="bl_data_util_box">
                 <button id="shEdit" class="bl_data_util_button">편집</button>
                 <button id="shRemove" class="bl_data_util_button">삭제</button>
@@ -24,12 +24,12 @@
             <input class="hp_unVisible" type="hidden" name="shRegDate" th:value="${stakeholder.shRegDate}" data-sh-edit="shEdit">
             <input class="hp_unVisible" type="hidden" name="shModDate" th:value="${stakeholder.shModDate}" data-sh-edit="shEdit">
             <input class="hp_unVisible" type="hidden" name="shWkId" th:value="${stakeholder.shWkId}" data-sh-edit="shEdit">
-            <input class="bl_data_item_text_edit" name="shName" type="text" th:value="${stakeholder.shName}" data-sh-edit="shEdit">
-            <input class="bl_data_item_text_edit" name="shCompany" type="text" th:value="${stakeholder.shCompany}" data-sh-edit="shEdit">
-            <input class="bl_data_item_text_edit" name="shMobile" type="text" th:value="${stakeholder.shMobile}" data-sh-edit="shEdit">
-            <input class="bl_data_item_text_edit" name="shPhone" type="text" th:value="${stakeholder.shPhone}" data-sh-edit="shEdit">
-            <input class="bl_data_item_text_edit" name="shEmail" type="text" th:value="${stakeholder.shEmail}" data-sh-edit="shEdit">
-            <input class="bl_data_item_text_edit" name="shAddress" type="text" th:value="${stakeholder.shAddress}" data-sh-edit="shEdit">
+            <input class="bl_data_item_content_edit" name="shName" type="text" th:value="${stakeholder.shName}" data-sh-edit="shEdit">
+            <input class="bl_data_item_content_edit" name="shCompany" type="text" th:value="${stakeholder.shCompany}" data-sh-edit="shEdit">
+            <input class="bl_data_item_content_edit" name="shMobile" type="text" th:value="${stakeholder.shMobile}" data-sh-edit="shEdit">
+            <input class="bl_data_item_content_edit" name="shPhone" type="text" th:value="${stakeholder.shPhone}" data-sh-edit="shEdit">
+            <input class="bl_data_item_content_edit" name="shEmail" type="text" th:value="${stakeholder.shEmail}" data-sh-edit="shEdit">
+            <input class="bl_data_item_content_edit" name="shAddress" type="text" th:value="${stakeholder.shAddress}" data-sh-edit="shEdit">
             <div class="bl_data_util_box">
                 <button id="shEditSubmit" class="bl_data_util_button">완료</button>
                 <button id="shEditCancel" class="bl_data_util_button">취소</button>
@@ -38,12 +38,12 @@
     </li>
     <div class="bl_data_item_box_edit">
         <input class="hp_unVisible" type="hidden" name="shWkId" th:value="${wkId}" data-sh-edit="shEdit">
-        <input class="bl_data_item_text_edit" name="shName" type="text" data-sh-edit="shEdit">
-        <input class="bl_data_item_text_edit" name="shCompany" type="text" data-sh-edit="shEdit">
-        <input class="bl_data_item_text_edit" name="shMobile" type="text" data-sh-edit="shEdit">
-        <input class="bl_data_item_text_edit" name="shPhone" type="text" data-sh-edit="shEdit">
-        <input class="bl_data_item_text_edit" name="shEmail" type="text" data-sh-edit="shEdit">
-        <input class="bl_data_item_text_edit" name="shAddress" type="text" data-sh-edit="shEdit">
+        <input class="bl_data_item_content_edit" name="shName" type="text" data-sh-edit="shEdit">
+        <input class="bl_data_item_content_edit" name="shCompany" type="text" data-sh-edit="shEdit">
+        <input class="bl_data_item_content_edit" name="shMobile" type="text" data-sh-edit="shEdit">
+        <input class="bl_data_item_content_edit" name="shPhone" type="text" data-sh-edit="shEdit">
+        <input class="bl_data_item_content_edit" name="shEmail" type="text" data-sh-edit="shEdit">
+        <input class="bl_data_item_content_edit" name="shAddress" type="text" data-sh-edit="shEdit">
         <div class="bl_data_util_box">
             <button id="shRegister" class="bl_data_util_button">등록</button>
         </div>
