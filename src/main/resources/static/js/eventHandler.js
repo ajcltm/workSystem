@@ -12,6 +12,7 @@ async function handleWorkInfo(id) {
     document.getElementById("workInfo").innerHTML = html;
     arrangeDisplay();
     levelize();
+    addEventListener_bl_data_work();
 }
 
 // ============= work event handler =========================
@@ -85,6 +86,7 @@ async function handleWorkFileUpLoad(e) {
     console.log("inputs_file"+inputs_file)
     const formdata_file = getEditFileFormData(inputs_file);
     if (([...formdata_file.keys()].length === 0)) {
+        console.log("empty file")
         return ;
     }
     const response_file = await fileUpload(formdata_file);
@@ -120,6 +122,57 @@ async function handleChangeParent(e){
     console.log(response.text());
 }
 
+async function handleRegisterChild(e) {
+
+    const closestBlDataItem = e.target.closest('.bl_data_item');
+    console.log("handleRegisterChild");
+
+    // 특정 data-속성을 가진 모든 input 요소 선택
+    const inputs = closestBlDataItem.querySelectorAll(`input[data-wk-edit]`);
+    console.log(inputs)
+
+    // 오늘 날짜를 yyyy-MM-dd 형식으로 가져오기
+    const today = new Date();
+    const formattedToday = today.toISOString().split('T')[0];
+
+    // wkRank 요소의 value를 저장 (단일 요소가 있다고 가정)
+    let wkRankValue = null;
+    inputs.forEach(input => {
+        if (input.name === "wkRank") {
+            wkRankValue = input.value;
+        }
+    });
+
+    // 조건에 맞지 않는 요소 제거 및 값 업데이트
+    inputs.forEach(input => {
+        if (input.name === "wkRepDate" || input.name === "wkDueDate") {
+            input.value = formattedToday; // 오늘 날짜로 설정
+        } else if (input.name === "wkParent" && wkRankValue !== null) {
+            input.value = wkRankValue; // wkRank의 value로 설정
+        } else if (input.name !== "wkRepDate" && input.name !== "wkDueDate" && input.name !== "wkParent") {
+            // 조건에 맞지 않는 요소 삭제
+            input.parentNode.removeChild(input);
+        }
+    });
+
+    const formdata = getEditFormData(inputs);
+    const response = await workRegister(formdata);
+
+    console.log("formdata : " + formdata);
+    console.log(response.text());
+}
+
+async function handleRemoveParent(e){
+    const currentId = wkId;
+    const response = await workRemoveParent(currentId);
+
+    console.log("handleChangeParent");
+    console.log("dataset changeWkId : " + currentId);
+    console.log(response.text());
+}
+
+
+
 // ============= logInfo event handler =========================
 
 async function handleLogInfo(e) {
@@ -130,6 +183,7 @@ async function handleLogInfo(e) {
     const html = await response.text()
     console.log("handleLogInfo");
     document.getElementById("logInfo").innerHTML = html;
+    await addEventListener_bl_data_log();
 }
 
 
@@ -202,6 +256,7 @@ async function handleStakeholderInfo(e) {
     const html = await response.text()
     console.log("handleStakeholderInfo");
     document.getElementById("stakeholderInfo").innerHTML = html;
+    addEventListener_bl_data_stakeholder();
 }
 
 async function handleStakeholderRegister(e) {
@@ -280,6 +335,7 @@ function getEditFormData(inputs) {
 }
 
 function getEditFileFormData(inputs) {
+    console.log("getEditFileFormData");
     // FormData 객체 생성
     const formData = new FormData();
 
@@ -289,6 +345,7 @@ function getEditFileFormData(inputs) {
         const wfWkId = input.dataset.wfWkId;
         const wfLgId = input.dataset.wfLgId;
         if (input.files.length === 0) {
+            console.log("empty file length!");
             return ;
         }
         // FormData에 키-값 추가

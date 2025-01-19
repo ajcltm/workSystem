@@ -22,6 +22,7 @@
             <if test="wkParent == null">
                 wkParent IS NULL
             </if>
+            order by wkRank
     </select>
 
     <select id="selectLast" resultType="org.hgtech.worksystem.domain.WorkVO">

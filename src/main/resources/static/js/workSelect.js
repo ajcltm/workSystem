@@ -46,7 +46,9 @@ function selectWkId(e) {
 function remove_wk_rankUpDown_btn() {
     const btn_rankUp = document.querySelector("#wkRankUp");
     const btn_rankDown = document.querySelector("#wkRankDown");
+    const btn_removeParent = document.querySelector("#wkRemoveParent");
 
     btn_rankUp.classList.remove("hp_unVisible");
     btn_rankDown.classList.remove("hp_unVisible");
+    btn_removeParent.classList.remove("hp_unVisible");
 }

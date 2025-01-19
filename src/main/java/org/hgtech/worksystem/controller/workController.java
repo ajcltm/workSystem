@@ -45,7 +45,7 @@ public class workController {
     }
 
     @GetMapping("workSystem/work/changeParent")
-    public ResponseEntity<String> changeParent(@RequestParam int parent, int wkId) {
+    public ResponseEntity<String> changeParent(@RequestParam(required = false) Integer parent, Integer wkId) {
         workService.changeParent(parent, wkId);
         return ResponseEntity.status(HttpStatus.CREATED).body("changeParent - parent : " + parent + " wkId : " + wkId );
     }

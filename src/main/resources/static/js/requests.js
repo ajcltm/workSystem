@@ -105,6 +105,17 @@ async function workChangeParent(parent, id) {
     return response;
 }
 
+async function workRemoveParent(id) {
+    const url = "/workSystem/work/changeParent"
+    const option = {
+        params: {
+            wkId : id
+        },
+    };
+    const response = await sendRequest(url, option)
+    return response;
+}
+
 // ====================== logInfo =======================
 
 async function logInfo(id) {

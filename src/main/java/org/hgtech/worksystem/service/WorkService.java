@@ -7,6 +7,8 @@ import org.hgtech.worksystem.repository.WorkRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.plaf.PanelUI;
 import java.time.LocalDateTime;
@@ -64,20 +66,22 @@ public class WorkService {
         return repository.update(mapper.map(workDTO, WorkVO.class));
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void changeRank(int rank, WorkVO workVO) {
+        System.out.println("changeRank : " + workVO.getWkRank()+ " -> " + rank + " " + workVO);
         workVO.setWkRank(rank);
-        System.out.println("changeRank : " + workVO.getWkRank()+ " ->" + rank  + workVO);
         repository.update(workVO);
     }
 
-    public void changeParent(int parent, int wkId) {
+    public void changeParent(Integer parent, Integer wkId) {
         WorkVO currentVO = repository.selectByWkId(wkId);
-        currentVO.setWkParent(parent);
-        repository.update(currentVO);
         int currentRank = currentVO.getWkRank();
 
         List<WorkVO> child = repository.selectByParent(parent);
         if (child != null) {
+            for (WorkVO vo : child) {
+                System.out.println(LocalDateTime.now() + " child --- parent " + parent + " : " + vo);
+            }
             Map<Integer, List<WorkVO>> map = new HashMap<>();
             int forChangeNum = 0;
             int maxNum = 0;
@@ -105,9 +109,13 @@ public class WorkService {
             for (Map.Entry<Integer, List<WorkVO>> entry : map.entrySet()) {
                 changParentBath(entry.getKey(), entry.getValue());
             }
+
+            currentVO.setWkParent(parent);
+            repository.update(currentVO);
         }
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void changParentBath(int rank, List<WorkVO> child) {
         if (child != null) {
             for (WorkVO vo: child) {

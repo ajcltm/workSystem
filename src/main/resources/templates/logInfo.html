@@ -11,7 +11,7 @@
         <div class="bl_data_item_subBox">
             <span class="bl_data_item_date" th:text="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}"></span>
             <span class="bl_data_item_file" th:each="file : ${log.fileVO}">
-                        <a th:href="'http://localhost:8080/workSystem/files/download?wfId=' + ${file.wfId}"
+                        <a th:href="'/workSystem/files/download?wfId=' + ${file.wfId}"
                            th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
                         </a>
                     </span>
@@ -19,11 +19,12 @@
         <div class="bl_data_item_subBox_edit hp_unVisible">
             <input class="bl_data_item_date_edit" name="lgDueDate" type="date" th:value="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}" data-lg-edit="lgEdit"></input>
             <span class="bl_data_item_file_edit" th:each="file : ${log.fileVO}">
-                        <span
-                                th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
-                        </span>
-                    </span>
-            <input class="bl_data_item_file_edit" name="files" type="file" data-lg-file-edit=lgFileEdit th:attr="data-wf-lg-id=${log.lgId}, data-wf-wk-id=0" multiple>
+                <span
+                        th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
+                </span>
+            </span>
+            <label class="bl_data_item_file_edit" th:for="'file_edit_' + ${log.lgId}" >파일 선택</label>
+            <input class="bl_data_item_file_edit" th:id="'file_edit_' + ${log.lgId}" name="files" type="file" data-lg-file-edit=lgFileEdit th:attr="data-wf-lg-id=${log.lgId}, data-wf-wk-id=0" multiple>
         </div>
         <div class="bl_data_item_box">
             <span class="bl_data_item_date" th:text="${#temporals.format(log.lgRepDate, 'yyyy-MM-dd')}"></span>
