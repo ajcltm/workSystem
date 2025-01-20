@@ -49,7 +49,7 @@
             </div>
         </div>
     </li>
-    <div class="bl_data_item_box_edit">
+    <div class="bl_data_item_box_edit bl_data_item_box_edit_registry">
         <input class="hp_unVisible" type="hidden" name="lgWkId" th:value="${wkId}" data-lg-edit="lgEdit">
         <input class="bl_data_item_date_edit hp_data_item_content_short" name="lgRepDate" type="date" data-lg-edit="lgEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
         <input class="bl_data_item_text_edit hp_data_item_content_long " name="lgDsc" type="text" data-lg-edit="lgEdit">

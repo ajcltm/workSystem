@@ -62,11 +62,11 @@
                     </div>
                 </div>
             </li>
-            <div class="bl_data_item_box_edit">
+            <div class="bl_data_item_box_edit bl_data_item_box_edit_registry">
                 <input class="hp_unVisible" type="hidden" name="wkUser" th:value="1" data-wk-edit="wkEdit">
-                <input class="bl_data_item_date_edit hp_data_item_content_short" name="wkRepDate" type="date" data-wk-edit="wkEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                <input class="bl_data_item_text_edit" name="wkTtl" type="text" data-wk-edit="wkEdit">
-                <input class="bl_data_item_text_edit bl_data_item_text_long" name="wkDsc" type="text" data-wk-edit="wkEdit">
+                <input class="bl_data_item_content_edit hp_data_item_content_short" name="wkRepDate" type="date" data-wk-edit="wkEdit" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                <input class="bl_data_item_content_edit" name="wkTtl" type="text" data-wk-edit="wkEdit">
+                <input class="bl_data_item_content_edit hp_data_item_content_long" name="wkDsc" type="text" data-wk-edit="wkEdit">
                 <div class="bl_data_util_box">
                     <button id="wkRegister" class="bl_data_util_button">등록</button>
                 </div>

@@ -42,6 +42,8 @@ function handleVisible(e) {
     const closestBlDataItem = e.target.closest('.bl_data_item');
 
     if (closestBlDataItem) {
+
+        closestBlDataItem.classList.toggle("bl_data_item_edit");
         // 해당 .bl_data_item 내에서 .bl_data_item_subBox_edit와 .bl_data_item_edit_box 찾기
         const subBoxEdit = closestBlDataItem.querySelector('.bl_data_item_subBox_edit');
         const boxEdit = closestBlDataItem.querySelector('.bl_data_item_box_edit');
