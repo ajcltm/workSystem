@@ -43,6 +43,7 @@ async function handle_bl_data_work_Click(e) {
 
     if (e.target.id === "wkEdit") {
         await handleVisible(e);
+        await addEventListener_fileList(e);
     }
 
     if (e.target.id === "wkEditSubmit") {
@@ -97,6 +98,13 @@ async function handle_bl_data_work_Click(e) {
         await selectWkId(e);
         await addEventListener_bl_data_work();
     }
+
+    if (e.target.id === "removeFile") {
+        await handleFileRemove(e);
+        await handleWorkInfo(1);
+        await addEventListener_bl_data_work();
+        await handleVisible(e);
+    }
 }
 
 function addEventListener_bl_data_log() {
@@ -118,6 +126,7 @@ async function handle_bl_data_log_Click(e) {
 
     if (e.target.id === "lgEdit") {
         await handleVisible(e);
+        await addEventListener_fileList(e);
     }
 
     if (e.target.id === "lgEditSubmit") {
@@ -133,6 +142,13 @@ async function handle_bl_data_log_Click(e) {
     if (e.target.id === "lgRegister") {
         await handleLogRegister(e);
         await handleLogInfo(e);
+    }
+
+    if (e.target.id === "removeFile") {
+        await handleFileRemove(e);
+        await handleLogInfo(1);
+        await handleVisible(e);
+        await addEventListener_bl_data_log();
     }
 }
 function addEventListener_bl_data_stakeholder() {

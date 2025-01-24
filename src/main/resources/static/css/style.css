@@ -38,6 +38,11 @@ input {
     height: 1.5rem;
 }
 
+button {
+    background-color: transparent;
+    border: none;
+}
+
 
 
 /* ========= layout =========== */
@@ -200,7 +205,8 @@ input {
 /* ====================== bl_data_item_box ======================== */
 
 .bl_data_item_box {
-    height: 1.2rem;
+    /*height: 1.2rem;*/
+    /*overflow: hidden;*/
 }
 
 .bl_data_item_box {
@@ -235,7 +241,7 @@ input {
     font-size: var(--font-size-smaill);
 }
 
-.bl_data_item_subBox_edit >* {
+.bl_data_item_subBox_edit > * {
     margin-right: .25rem;
 }
 

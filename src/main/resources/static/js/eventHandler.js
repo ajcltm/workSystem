@@ -42,7 +42,7 @@ function handleVisible(e) {
     const closestBlDataItem = e.target.closest('.bl_data_item');
 
     if (closestBlDataItem) {
-
+        console.log("click handel visible " + e.target)
         closestBlDataItem.classList.toggle("bl_data_item_edit");
         // 해당 .bl_data_item 내에서 .bl_data_item_subBox_edit와 .bl_data_item_edit_box 찾기
         const subBoxEdit = closestBlDataItem.querySelector('.bl_data_item_subBox_edit');
@@ -173,7 +173,14 @@ async function handleRemoveParent(e){
     console.log(response.text());
 }
 
+async function handleFileRemove(e){
+    const wfId = e.target.closest(".bl_data_item_file_edit").id
+    const response = await fileReomve(wfId);
 
+    console.log("handleChangeParent");
+    console.log("dataset changeWkId : " + wfId);
+    console.log(response.text());
+}
 
 // ============= logInfo event handler =========================
 
@@ -318,6 +325,8 @@ async function handleFileDownload(e) {
     console.log("dataset wfId : " + id);
     console.log(response.text());
 }
+
+
 
 // ========== form data ===================
 function getEditFormData(inputs) {

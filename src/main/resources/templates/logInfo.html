@@ -18,13 +18,15 @@
         </div>
         <div class="bl_data_item_subBox_edit hp_unVisible">
             <input class="bl_data_item_content_edit" name="lgDueDate" type="date" th:value="${#temporals.format(log.lgModDate, 'yyyy-MM-dd')}" data-lg-edit="lgEdit"></input>
-            <span class="bl_data_item_file_edit" th:each="file : ${log.fileVO}">
+            <span class="bl_data_item_file_edit" th:each="file : ${log.fileVO}" th:id="${file.wfId}">
                 <span
                         th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
                 </span>
+                <button id="removeFile"> x  </button>
             </span>
             <label class="bl_data_item_file_edit" th:for="'file_edit_' + ${log.lgId}" >파일 선택</label>
             <input class="bl_data_item_file_edit" th:id="'file_edit_' + ${log.lgId}" name="files" type="file" data-lg-file-edit=lgFileEdit th:attr="data-wf-lg-id=${log.lgId}, data-wf-wk-id=0" multiple>
+            <span class="fileList"></span>
         </div>
         <div class="bl_data_item_box">
             <span class="bl_data_item_content hp_data_item_content_short" th:text="${#temporals.format(log.lgRepDate, 'yyyy-MM-dd')}"></span>

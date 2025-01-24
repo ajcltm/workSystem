@@ -24,18 +24,20 @@
                 </div>
                 <div class="bl_data_item_subBox_edit hp_unVisible">
                     <input class="bl_data_item_content_edit" name="wkDueDate" type="date" th:value="${#temporals.format(work.wkModDate, 'yyyy-MM-dd')}" data-wk-edit="wkEdit"></input>
-                    <span class="bl_data_item_file_edit" th:each="file : ${work.fileVO}">
-                        <span
-                                th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
+                    <span class="bl_data_item_file_edit" th:each="file : ${work.fileVO}" th:id="${file.wfId}">
+                        <span th:text="${file.wfName.length() > 10 ? file.wfName.substring(0, 10) + '...' : file.wfName}">
                         </span>
+                        <button id="removeFile"> x  </button>
                     </span>
                     <label class="bl_data_item_file_edit" th:for="'file_edit_' + ${work.wkId}">파일 선택</label>
                     <input class="bl_data_item_file_edit" th:id="'file_edit_' + ${work.wkId}"  name="files" type="file" data-wk-file-edit=wkFileEdit th:attr="data-wf-wk-id=${work.wkId}, data-wf-lg-id=0" multiple>
+                    <span class="fileList"></span>
                 </div>
                 <div class="bl_data_item_box">
                     <span class="bl_data_item_content hp_data_item_content_short" th:text="${#temporals.format(work.wkRepDate, 'yyyy-MM-dd')}"></span>
                     <span class="bl_data_item_content" th:text="${work.wkTtl}"></span>
                     <span class="bl_data_item_content hp_data_item_content_long" th:text="${work.wkDsc}"></span>
+                    <span class="bl_data_item_content hp_data_item_content_short" th:text="${work.wkTag}"></span>
                     <div class="bl_data_util_box">
                         <button id="wkEdit" class="bl_data_util_button hp_unVisible">편집</button>
                         <button id="wkRemove" class="bl_data_util_button hp_unVisible">삭제</button>
@@ -49,13 +51,13 @@
                     <input class="hp_unVisible" type="hidden" name="wkModDate" th:value="${work.wkModDate}" data-wk-edit="wkEdit">
                     <input class="hp_unVisible" type="hidden" name="wkUser" th:value="${work.wkUser}" data-wk-edit="wkEdit">
                     <input class="hp_unVisible" type="hidden" name="wkResUser" th:value="${work.wkResUser}" data-wk-edit="wkEdit">
-                    <input class="hp_unVisible" type="hidden" name="wkTag" th:value="${work.wkTag}" data-wk-edit="wkEdit">
                     <input class="hp_unVisible" type="hidden" name="wkImp" th:value="${work.wkImp}" data-wk-edit="wkEdit">
                     <input class="hp_unVisible" type="hidden" name="wkParent" th:value="${work.wkParent}" data-wk-edit="wkEdit">
                     <input class="hp_unVisible" type="hidden" name="wkRank" th:value="${work.wkRank}" data-wk-edit="wkEdit">
                     <input class="bl_data_item_content_edit hp_data_item_content_short" name="wkRepDate" type="date" th:value="${#temporals.format(work.wkRepDate, 'yyyy-MM-dd')}" data-wk-edit="wkEdit">
                     <input class="bl_data_item_content_edit" name="wkTtl" type="text" th:value="${work.wkTtl}" data-wk-edit="wkEdit">
                     <input class="bl_data_item_content_edit hp_data_item_content_long" name="wkDsc" type="text" th:value="${work.wkDsc}" data-wk-edit="wkEdit">
+                    <input class="bl_data_item_content_edit hp_data_item_content_short" name="wkTag" type="text" th:value="${work.wkTag}" data-wk-edit="wkEdit">
                     <div class="bl_data_util_box">
                         <button id="wkEditSubmit" class="bl_data_util_button">완료</button>
                         <button id="wkEditCancel" class="bl_data_util_button">취소</button>
