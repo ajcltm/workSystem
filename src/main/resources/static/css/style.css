@@ -43,6 +43,10 @@ button {
     border: none;
 }
 
+body {
+    overflow: hidden;
+}
+
 
 
 /* ========= layout =========== */
@@ -494,7 +498,7 @@ input[type="file"] {
 }
 
 .el_copyRight:after {
-    content: "Ajcltm";
+    content: "ⓒ 2025 Ajcltm All Right Reserved";
     margin-left: 1.5rem;
     color: rgba(var(--oposite-color));
 }
@@ -516,6 +520,22 @@ input[type="file"] {
 
 .hp_primary_bg {
     background-color: rgba(var(--primary-color), 1);
+}
+
+.hp_secondary_bg {
+    background-color: rgba(var(--secondary-color), 1);
+}
+
+.hp_thirdary_bg {
+    background-color: rgba(var(--thirdary-color), 1);
+}
+
+.hp_sub_bg {
+    background-color: rgba(var(--sub-color), 1);
+}
+
+.hp_clear_bg {
+    background-color: rgba(var(--clear-color), .9);
 }
 
 .hp_shadow {

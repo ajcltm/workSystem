@@ -64,7 +64,7 @@
                 w.wkId,
                 w.wkRank,
                 w.wkParent,
-                CONCAT(wh.Path, ' > ', CAST(LPAD(W.wkRank, 5, '0') AS CHAR(255))) AS Path,
+                CONCAT(wh.Path, ' > ', CAST(LPAD(w.wkRank, 5, '0') AS CHAR(255))) AS Path,
                 wh.Level + 1 AS Level
             FROM tbl_work w
                      INNER JOIN WorkHierarchy wh ON w.wkParent = wh.wkRank
